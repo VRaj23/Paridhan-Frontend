@@ -1,0 +1,5 @@
+<div>
+    <ul *ngFor = 'let type of typeList$ | async'>
+        <app-product-type-record [productType] = type></app-product-type-record>
+    </ul>
+</div>
