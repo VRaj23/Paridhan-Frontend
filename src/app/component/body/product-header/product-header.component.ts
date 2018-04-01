@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../service/data.service';
 import { Observable } from 'rxjs/Observable';
 import { ProductHeader } from '../../../model/product-header.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-header',
@@ -10,12 +11,15 @@ import { ProductHeader } from '../../../model/product-header.model';
 })
 export class ProductHeaderComponent implements OnInit {
 
+  private typeID: number;
   headerList$: Observable<Array<ProductHeader>>;
 
-  constructor(private _dateService: DataService) { }
+  constructor(private _route: ActivatedRoute,private _dateService: DataService) { 
+    this.typeID = _route.snapshot.params['type'];
+  }
 
   ngOnInit() {
-    this.headerList$ = this._dateService.getProductHeader();
+    this.headerList$ = this._dateService.getProductHeader(this.typeID);
   }
 
 }

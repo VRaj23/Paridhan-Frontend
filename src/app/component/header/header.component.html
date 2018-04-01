@@ -1,13 +1,25 @@
-<div  class="container">
+<div class="container">
   <div class="row">
+    
     <div role="presentation">
       <a [routerLink]="['']">
         <p>Retail Shop</p>
       </a>
     </div>
-    <div class = "alignRight">
-      <app-cart></app-cart>
+
+    <div class="cart row">
+      
+      <div>
+        <app-search></app-search>
+      </div>
+
+      <div role="presentation">
+        <a [routerLink]="['/cart']">
+          <app-cart></app-cart>
+        </a>
+      </div>
+    
     </div>
+  
   </div>
 </div>
-

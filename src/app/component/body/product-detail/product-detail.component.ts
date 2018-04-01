@@ -19,7 +19,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.detailList$ = this._dataService.getProductDetail();
+    this.detailList$ = this._dataService.getProductDetail(this.headerID);
   }
 
 }

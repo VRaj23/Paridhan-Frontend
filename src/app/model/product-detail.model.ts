@@ -1,8 +1,6 @@
 export class ProductDetail{
     lineID: number;
-    red: number;
-    green: number;
-    blue: number;
+    color: string;
     sizeNum: number;
     sizeChar: string;
 }
