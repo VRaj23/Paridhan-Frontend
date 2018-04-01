@@ -13,9 +13,12 @@ import { ProductTypeComponent } from './component/body/product-type/product-type
 import { ProductHeaderComponent } from './component/body/product-header/product-header.component';
 import { ProductDetailComponent } from './component/body/product-detail/product-detail.component';
 import { ProductTypeRecordComponent } from './component/body/product-type/product-type-record/product-type-record.component';
+import { ProductHeaderRecordComponent } from './component/body/product-header/product-header-record/product-header-record.component';
 
 const appRoutes: Routes = [
   {path: '', component: ProductTypeComponent}
+  ,{path: 'product/:type', component: ProductHeaderComponent}
+  ,{path: 'product/:type/:header', component: ProductDetailComponent}
 ];
 
 @NgModule({
@@ -27,7 +30,8 @@ const appRoutes: Routes = [
     ProductTypeComponent,
     ProductHeaderComponent,
     ProductDetailComponent,
-    ProductTypeRecordComponent
+    ProductTypeRecordComponent,
+    ProductHeaderRecordComponent
   ],
   imports: [
     BrowserModule,

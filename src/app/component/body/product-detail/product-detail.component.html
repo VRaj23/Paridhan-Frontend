@@ -1,3 +1,5 @@
-<p>
-  product-detail works!
-</p>
+<div>
+  <ul *ngFor = 'let detail of detailList$ | async '>
+    <li>{{detail.lineID}}</li>
+  </ul>
+</div>

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductDetail } from '../../../model/product-detail.model';
+import { ActivatedRoute } from '@angular/router';
+import { DataService } from '../../../service/data.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-product-detail',
@@ -7,9 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductDetailComponent implements OnInit {
 
-  constructor() { }
+  private detailList$: Observable<Array<ProductDetail>>;
+  private headerID: number;
+
+  constructor(private _route: ActivatedRoute,private _dataService: DataService) { 
+    this.headerID = _route.snapshot.params['header'];
+  }
 
   ngOnInit() {
+    this.detailList$ = this._dataService.getProductDetail();
   }
 
 }

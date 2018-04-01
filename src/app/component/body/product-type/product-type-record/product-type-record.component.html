@@ -1,8 +1,10 @@
-<div>
-  <div>
-    <img src={{imageDownloadAPI+productType.typeImage.imageID}}>
-  </div>
-  <div>
-    <p> {{ productType.description }} </p>
-  </div>
+<div role="presentation">
+  <a [routerLink]="['/product',productType.typeID]">
+    <div>
+      <img src={{imageDownloadAPI+productType.typeImage.imageID}}>
+    </div>
+    <div>
+      <p> {{ productType.description }} </p>
+    </div>
+  </a>
 </div>

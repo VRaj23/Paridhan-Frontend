@@ -1,3 +1,5 @@
-<p>
-  product-header works!
-</p>
+<div>
+  <ul *ngFor = 'let header of headerList$ | async'>
+    <app-product-header-record [productHeader]= header></app-product-header-record>
+  </ul>
+</div>

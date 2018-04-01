@@ -1,0 +1,13 @@
+<div>
+    <a [routerLink] = "['/product',typeID,productHeader.headerID]">
+      <div>
+        <p>{{ productHeader.brand }}</p>
+      </div>
+      <div>
+        <img src={{imageDownloadAPI+productHeader.imageID}}>
+      </div>
+      <div>
+        <p> {{ productHeader.price }} </p>
+      </div>
+    </a>
+  </div>
