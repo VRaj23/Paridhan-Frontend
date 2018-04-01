@@ -8,8 +8,8 @@ import { ProductDetail } from '../model/product-detail.model';
 
 @Injectable()
 export class DataService {
-  //private backendAPI: string = "http://localhost:8080";
-  private backendAPI: string = "http://192.168.1.3:8080";
+  private backendAPI: string = "http://localhost:8080";
+  //private backendAPI: string = "http://192.168.1.3:8080";
   private productHeaderAPI: string = "/product/header";
   private productTypeAPI: string = "/product/type";
   private imageDownloadAPI: string = "/product/download/";
@@ -27,9 +27,9 @@ export class DataService {
       (this.backendAPI + this.productHeaderAPI + "?t=" + typeID.toString());
   }
 
-  getProductDetail(headerID: number): Observable<Array<ProductDetail>>{
+  getProductDetail(headerID: string): Observable<Array<ProductDetail>>{
     return this._http.get<Array<ProductDetail>>
-      (this.backendAPI + this.productDetailAPI + "?h=" + headerID.toString());
+      (this.backendAPI + this.productDetailAPI + "?h=" + headerID);
   }
 
   getImageDownloadAPI(): string{

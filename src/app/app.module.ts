@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { DataService } from './service/data.service';
+import { StoreService } from './service/store.service';
 import { HeaderComponent } from './component/header/header.component';
 import { CartComponent } from './component/header/cart/cart.component';
 import { BodyComponent } from './component/body/body.component';
@@ -22,7 +23,7 @@ import { SearchComponent } from './component/header/search/search.component';
 const appRoutes: Routes = [
   {path: '', component: ProductTypeComponent}
   ,{path: 'product/:type', component: ProductHeaderComponent}
-  ,{path: 'product/:type/:header', component: ProductDetailComponent}
+  ,{path: 'detail', component: ProductDetailComponent}
   ,{path: 'cart', component: CartDetailComponent}
 ];
 
@@ -45,10 +46,11 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes,{initialNavigation: false})
   ],
   providers: [
-    DataService
+    DataService,
+    StoreService
   ],
   bootstrap: [AppComponent]
 })

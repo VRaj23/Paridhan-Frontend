@@ -1,5 +1,6 @@
 <div>
-    <a [routerLink] = "['/product',typeID,productHeader.headerID]">
+    <!--<a [routerLink] = "['/product',typeID,productHeader.headerID]">-->
+      <a (click)="loadProductDetail()">
       <div>
         <p>{{ productHeader.brand }}</p>
       </div>

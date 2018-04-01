@@ -1,5 +1,6 @@
 <div role="presentation">
-  <a [routerLink]="['/product',productType.typeID]">
+  <!--<a [routerLink]="['/product',productType.typeID]">-->
+    <a (click)="loadProductHeader()">
     <div>
       <img src={{imageDownloadAPI+productType.typeImage.imageID}}>
     </div>

@@ -1,3 +1,4 @@
+<p>{{ selectedType.description+"s"}}</p>
 <div>
   <ul *ngFor = 'let header of headerList$ | async'>
     <app-product-header-record [productHeader]= header></app-product-header-record>

@@ -1,19 +1,17 @@
 <div>
+  <div>
+    <img src={{imageDownload}}>
+  </div>
   <div *ngFor = 'let detail of detailList$ | async '>
-    <div>
-      <ul>
-        <li>{{detail.lineID}}</li>
-      </ul>
-    </div>
     <div class="container">
         <div class="row">
           <app-product-detail-size [detailSizeValue]=detail.sizeChar></app-product-detail-size>
         </div>
-      </div>
-      <div class="container">
-          <div class="row">
-            <app-product-detail-color [detailColorValue]=detail.color></app-product-detail-color>
-          </div>
+    </div>
+     <div class="container">
+        <div class="row">
+          <app-product-detail-color [detailColorValue]=detail.color></app-product-detail-color>
         </div>
-    </div>    
+     </div>
+  </div>    
 </div>
