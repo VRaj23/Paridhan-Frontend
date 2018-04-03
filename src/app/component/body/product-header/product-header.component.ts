@@ -13,18 +13,20 @@ import { ProductType } from '../../../model/product-type.model';
 })
 export class ProductHeaderComponent implements OnInit {
 
-  private typeID: number;
   private selectedType: ProductType;
   headerList$: Observable<Array<ProductHeader>>;
 
   constructor(private _route: ActivatedRoute,private _dateService: DataService
     ,_store: StoreService) { 
     this.selectedType = _store.getSelectedType();
-    this.typeID = _route.snapshot.params['type'];
   }
 
   ngOnInit() {
-    this.headerList$ = this._dateService.getProductHeader(this.typeID);
+    this.headerList$ = this._dateService.getProductHeader(this.selectedType.typeID);
+  }
+  
+  ngOnDestory(){
+    
   }
 
 }

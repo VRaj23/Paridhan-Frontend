@@ -1,8 +1,9 @@
 <div role="presentation">
   <!--<a [routerLink]="['/product',productType.typeID]">-->
     <a (click)="loadProductHeader()">
-    <div>
-      <img src={{imageDownloadAPI+productType.typeImage.imageID}}>
+    <div class="col-xs-12">
+      <img src={{imageDownloadAPI+productType.typeImage.imageID}} 
+           class="img-responsive img-rounded">
     </div>
     <div>
       <p> {{ productType.description }} </p>

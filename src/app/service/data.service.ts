@@ -8,8 +8,8 @@ import { ProductDetail } from '../model/product-detail.model';
 
 @Injectable()
 export class DataService {
-  private backendAPI: string = "http://localhost:8080";
-  //private backendAPI: string = "http://192.168.1.3:8080";
+  //private backendAPI: string = "http://localhost:8080";
+  private backendAPI: string = "http://192.168.1.3:8080";
   private productHeaderAPI: string = "/product/header";
   private productTypeAPI: string = "/product/type";
   private imageDownloadAPI: string = "/product/download/";

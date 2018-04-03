@@ -1,17 +1,42 @@
-<div>
-  <div>
-    <img src={{imageDownload}}>
-  </div>
-  <div *ngFor = 'let detail of detailList$ | async '>
-    <div class="container">
-        <div class="row">
-          <app-product-detail-size [detailSizeValue]=detail.sizeChar></app-product-detail-size>
-        </div>
+<div class="content">
+
+    <div>
+      <a [routerLink]="['/product']">Back to {{selectedType.description}}s</a>
     </div>
-     <div class="container">
+  
+    <div>
+      <img src={{imageDownload}}>
+    </div>
+  
+    <div>
+      <p>{{selectedProductHeader.brand}} {{selectedType.description}} @ Rs.{{selectedProductHeader.price}}</p>
+    </div>
+
+    <div>
+      <div class="container">
         <div class="row">
-          <app-product-detail-color [detailColorValue]=detail.color></app-product-detail-color>
+          <div class="col-xs-1" *ngFor = 'let detail of productDetails'>
+            <app-product-detail-color [detailColorValue]=detail.color></app-product-detail-color>
+          </div>
         </div>
-     </div>
-  </div>    
-</div>
+      </div>
+    </div>
+
+    <div>
+        <div class="container" >
+          <div class="row">
+            <div class="col-xs-1" *ngFor = 'let detail of productDetails'>
+              <app-product-detail-size [detailSizeValue]=detail.sizeChar></app-product-detail-size>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <button (click)="addToCart()"
+        class="btn btn-block">
+        Add to Cart
+      </button>
+    </footer>
+
+  </div>

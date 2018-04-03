@@ -21,7 +21,7 @@ export class ProductTypeRecordComponent implements OnInit {
 
   loadProductHeader(){
     this._store.setSelectedType(this.productType);
-    this._router.navigate(['/product',this.productType.typeID]);
+    this._router.navigate(['/product']);
   }
 
   ngOnInit() {

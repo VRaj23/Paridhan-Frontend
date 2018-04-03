@@ -19,10 +19,11 @@ import { ProductDetailColorComponent } from './component/body/product-detail/pro
 import { ProductDetailSizeComponent } from './component/body/product-detail/product-detail-size/product-detail-size.component';
 import { CartDetailComponent } from './component/body/cart-detail/cart-detail.component';
 import { SearchComponent } from './component/header/search/search.component';
+import { CartItemComponent } from './component/body/cart-detail/cart-item/cart-item.component';
 
 const appRoutes: Routes = [
   {path: '', component: ProductTypeComponent}
-  ,{path: 'product/:type', component: ProductHeaderComponent}
+  ,{path: 'product', component: ProductHeaderComponent}
   ,{path: 'detail', component: ProductDetailComponent}
   ,{path: 'cart', component: CartDetailComponent}
 ];
@@ -41,7 +42,8 @@ const appRoutes: Routes = [
     ProductDetailColorComponent,
     ProductDetailSizeComponent,
     CartDetailComponent,
-    SearchComponent
+    SearchComponent,
+    CartItemComponent
   ],
   imports: [
     BrowserModule,

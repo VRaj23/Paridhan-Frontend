@@ -10,7 +10,7 @@ export class ProductDetailColorComponent implements OnInit {
   @Input() detailColorValue: string = 'FFFFFF';
 
   private detailColor(): any{
-    return { 'background-color': '#'+this.detailColorValue};
+    return { 'background': '#'+this.detailColorValue};
   }
 
   constructor() { }
