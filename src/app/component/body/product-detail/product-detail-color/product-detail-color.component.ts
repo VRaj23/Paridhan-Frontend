@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-product-detail-color',
@@ -7,15 +7,34 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ProductDetailColorComponent implements OnInit {
 
-  @Input() detailColorValue: string = 'FFFFFF';
+  @Input() detailValue: string = "";
+  @Input() detailType: string;
 
-  private detailColor(): any{
-    return { 'background': '#'+this.detailColorValue};
+  @Output() eventEmitter: EventEmitter<{"value":string,"type":string}>  = new EventEmitter();
+  
+  private setClass(): any{
+    return "colorButton";
   }
 
-  constructor() { }
+  private setStyle(element): any{
+    //console.log("setStyle: "+this.detailType+" "+this.detailValue);
+    if (this.detailType === "COLOR")
+      return { 'background': '#'+this.detailValue };
+    else
+      return { 'value' : this.detailValue };
+  }
+
+  private onClick(){
+    //console.log("onClick: "+this.detailType+" "+this.detailValue);
+    this.eventEmitter.emit({"value": this.detailValue,"type": this.detailType});
+  }
+
+  constructor() { 
+    //console.log("constructor: "+this.detailType+" "+this.detailValue);
+  }
 
   ngOnInit() {
+    //console.log("ngOnInit: "+this.detailType+" "+this.detailValue);
   }
 
 }

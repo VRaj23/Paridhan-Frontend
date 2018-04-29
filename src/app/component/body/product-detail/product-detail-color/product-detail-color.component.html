@@ -1,3 +1,6 @@
-  <!--<button class="btwidth" [ngStyle]="detailColor()"> </button>-->
-  <div class="box" [ngStyle] = "detailColor()"></div>
-
+<input
+    type="button"
+    [ngClass] ="setClass()" 
+    [ngStyle] = "setStyle()" 
+    (click)="onClick($event.target)"
+>

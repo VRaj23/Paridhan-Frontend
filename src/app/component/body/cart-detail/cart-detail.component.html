@@ -3,11 +3,18 @@
 </p>
 
 <div>
-  <app-cart-item></app-cart-item>
+  <ul *ngFor='let order of orders'>
+    <app-cart-item [order]=order></app-cart-item>
+  </ul>
+
 <div>
+
+  <p>
+    Total: {{totalAmount}}
+  </p>
 
 <div>
   <footer>
-    <button class="btn btn-block">Order</button>
+    <button (click)="initiateOrder()" class="btn btn-block">Order</button>
   </footer>
 </div>

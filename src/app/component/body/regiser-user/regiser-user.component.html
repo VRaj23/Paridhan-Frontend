@@ -1,0 +1,15 @@
+<p>
+  Create Account
+</p>
+
+<div>
+    <form (ngSubmit)="sendRegisterRequest(formData)" #formData = ngForm>
+        Name: <input type="text" ngModel name="name"><br>
+        Mobile: <input type="text" ngModel name="username"><br>
+        Password: <input type="password" ngModel name="password"><br>
+        Confirm Password: <input type="password" ngModel name="password2"><br>
+        <!-- add Address -->
+        <button type="submit">Submit</button>
+      </form>
+      
+</div>

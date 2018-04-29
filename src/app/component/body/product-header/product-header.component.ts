@@ -14,7 +14,7 @@ import { ProductType } from '../../../model/product-type.model';
 export class ProductHeaderComponent implements OnInit {
 
   private selectedType: ProductType;
-  headerList$: Observable<Array<ProductHeader>>;
+  private headerList: Array<ProductHeader>;
 
   constructor(private _route: ActivatedRoute,private _dateService: DataService
     ,_store: StoreService) { 
@@ -22,7 +22,12 @@ export class ProductHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.headerList$ = this._dateService.getProductHeader(this.selectedType.typeID);
+    this._dateService.getProductHeader(this.selectedType.typeID)
+      .subscribe(
+        (response) => {
+          this.headerList = response.message
+        }
+      );
   }
   
   ngOnDestory(){

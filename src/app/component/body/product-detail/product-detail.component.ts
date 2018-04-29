@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { ProductHeader } from '../../../model/product-header.model';
 import { ProductType } from '../../../model/product-type.model';
 import { StoreService } from '../../../service/store.service';
+import { Order } from '../../../model/order.model';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -19,31 +20,47 @@ export class ProductDetailComponent implements OnInit {
   private selectedProductHeader: ProductHeader;
   private selectedType: ProductType;
   private imageDownload: string;
-  private detailSubscription: Subscription;
+  private cartCountSubscription: Subscription;
   private itemsInCart: number = 0;
+  private typeColor: string = "COLOR";
+  private typeSize: string = "SIZE";
 
-  constructor(private _route: ActivatedRoute,private _dataService: DataService
-    ,private _store: StoreService) {
-      this.selectedProductHeader = _store.getSelectedProductHeader(); 
-      this.selectedType = _store.getSelectedType();
-      this.imageDownload = _dataService.getImageDownloadAPI()+this.selectedProductHeader.imageID;
-      this._store.currentCarCount.subscribe(count => this.itemsInCart = count);
-  
+  constructor(private route: ActivatedRoute,private dataService: DataService
+    ,private store: StoreService) {
+      this.selectedProductHeader = store.getSelectedProductHeader(); 
+      this.selectedType = store.getSelectedType();
+      this.imageDownload = dataService.getImageDownloadAPI()+this.selectedProductHeader.imageID; 
   }
 
   private addToCart(){
-    this._store.add2Cart(++this.itemsInCart);
+    var order = new Order();
+    
+    order.quantity = 1;
+    
+    var price = this.selectedProductHeader.price;
+    var discout = this.selectedProductHeader.discount;
+    order.amount = price - price*(discout/100);
+
+    this.store.addOrder(order);
   }
 
   ngOnInit() {
-    this.detailSubscription = this._dataService.getProductDetail
-      (this.selectedProductHeader.headerID.toString()).subscribe(
-        (details) => this.productDetails = details
+
+    this.cartCountSubscription = this.store.currentCartCount
+      .subscribe(count => this.itemsInCart = count);
+
+    this.dataService.getProductDetail(this.selectedProductHeader.headerID.toString())
+      .subscribe(
+        (response) => {this.productDetails = response.message;}
       );
   }
 
   ngOnDestory(){
-    this.detailSubscription.unsubscribe();
+    this.cartCountSubscription.unsubscribe();
+  }
+
+  onChildClick(obj){
+    //console.log("value: "+obj.value+" Type: "+obj.type);
   }
 
 }

@@ -1,0 +1,15 @@
+<p>
+  Please Login to proceed
+</p>
+
+<form (ngSubmit)="login(data)" #data = ngForm>
+  Mobile: <input type="text" ngModel name="username"><br>
+  Password: <input type="password" ngModel name="password"><br>
+  <button type="submit">Login</button>
+</form>
+
+<br>
+<br>
+<div>
+  <button (click)="newUser()">New User? Register</button>
+</div>

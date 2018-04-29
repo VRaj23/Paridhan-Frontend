@@ -13,7 +13,7 @@ export class CartComponent implements OnInit {
   constructor(private _storeService: StoreService) { }
 
   ngOnInit() {
-    this._storeService.currentCarCount.subscribe(count => this.itemsInCart = count);
+    this._storeService.currentCartCount.subscribe(count => this.itemsInCart = count);
   }
 
 }

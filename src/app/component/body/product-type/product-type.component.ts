@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ProductType } from '../../../model/product-type.model';
 import { DataService } from '../../../service/data.service';
+import { JsonResponse } from '../../../model/json-response.model';
 
 @Component({
   selector: 'app-product-type',
@@ -11,11 +12,17 @@ import { DataService } from '../../../service/data.service';
 export class ProductTypeComponent implements OnInit {
 
   typeList$: Observable<Array<ProductType>>;
+  productTypeList: Array<any>;
 
   constructor(private _dataService: DataService) { }
 
   ngOnInit() {
-    this.typeList$ = this._dataService.getProductType();
+    this._dataService.getProductType().subscribe(
+      (jsonResponse) => {
+        this.productTypeList = jsonResponse.message;
+      }
+    );
+
   }
 
 }

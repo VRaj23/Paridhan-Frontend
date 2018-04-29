@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ProductDetailSizeComponent implements OnInit {
 
-  @Input() detailSizeValue: string;
+  @Input() detailValue: string;
 
   constructor() { }
 
