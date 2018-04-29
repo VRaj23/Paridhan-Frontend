@@ -9,6 +9,7 @@ import { JsonResponse } from '../model/json-response.model';
 import { LoginRequest } from '../model/login-request.model';
 import { RegisterRequest } from '../model/register-request.model';
 import { StoreService } from '../service/store.service';
+import { Order } from '../model/order.model';
 
 @Injectable()
 export class DataService {
@@ -21,6 +22,8 @@ export class DataService {
   private customerLoginAPI: string = "/customer/login";
   private registerUserAPI: string = "/customer/registerUser";
   private customerNameAPI: string = "/auth/customer/name";
+  private customerAddOrderAPI: string = "/auth/customer/order/addOrder";
+  private customerOrdersAPI: string = "/auth/customer/order/getAll";
 
   constructor(private _http: HttpClient, private storeService: StoreService) { 
   }
@@ -44,14 +47,14 @@ export class DataService {
     return this.backendAPI + this.imageDownloadAPI;
   }
 
+  private getHeaderWithToken(): {}{
+    return {headers: new HttpHeaders()
+      .append("Authorization", "Bearer ".concat(this.storeService.getToken()) )};
+  }
+
   getName(): Observable<JsonResponse>{
-    const tokenHeader = new HttpHeaders()
-      .append("Authorization", "Bearer ".concat(this.storeService.getToken()) );
-
-    console.log("CHECKING HEADER\n"+tokenHeader.get("Authorization"));
-
     return this._http.get<JsonResponse>(this.backendAPI + this.customerNameAPI
-      ,{headers: tokenHeader});
+      ,this.getHeaderWithToken() );
   }
 
   postLogin(request: LoginRequest): Observable<JsonResponse>{
@@ -62,4 +65,14 @@ export class DataService {
     return this._http.post<JsonResponse>(this.backendAPI + this.registerUserAPI,request);
   }
 
+  postOrders(request: Order): Observable<JsonResponse>{
+    return this._http.post<JsonResponse>(this.backendAPI + this.customerAddOrderAPI
+      ,request
+      ,this.getHeaderWithToken());
+  }
+
+  getCustomerOrders(): Observable<JsonResponse>{
+    return this._http.get<JsonResponse>(this.backendAPI + this.customerOrdersAPI
+      ,this.getHeaderWithToken() );
+  }
 }

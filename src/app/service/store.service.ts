@@ -49,7 +49,6 @@ export class StoreService {
 
   onLogin(token: string, name: string){
     this.token = token.replace(/(\r\n|\n|\r)/gm,"").trim();
-    console.log("Token Received "+this.token);
     this.loggedIn.next(true);
   }
 
@@ -66,6 +65,11 @@ export class StoreService {
 
   private add2Cart(count: number){
     this.cartCount.next(count);
+  }
+
+  resetCart(){
+    this.cartCount.next(0);
+    this.orders = [];
   }
   //-----------------------------------------------//
   //-----------------------------------------------//

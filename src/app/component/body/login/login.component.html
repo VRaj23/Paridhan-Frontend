@@ -2,10 +2,18 @@
   Please Login to proceed
 </p>
 
-<form (ngSubmit)="login(data)" #data = ngForm>
-  Mobile: <input type="text" ngModel name="username"><br>
-  Password: <input type="password" ngModel name="password"><br>
-  <button type="submit">Login</button>
+<form (ngSubmit)="login(formData)" #formData = ngForm>
+  
+  Mobile: <input type="text" ngModel name="username" required autofocus><br>
+  
+  Password: <input type="password" ngModel name="password" required><br>
+  
+  <button 
+    class="btn btn-primary"
+    type="submit"
+    [disabled]="!formData.valid">
+  Login</button>
+
 </form>
 
 <br>

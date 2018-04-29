@@ -12,6 +12,54 @@
       <p>{{selectedProductHeader.brand}} {{selectedType.description}} @ Rs.{{selectedProductHeader.price}}</p>
     </div>
 
+    <form #formData="ngForm">
+      <div ngModelGroup="colorGroup">
+        <div class="radio" *ngFor="let detail of productDetails">
+          <label>
+            <input
+              type="radio"
+              name="color"
+              [ngModel] = "defaultColor" 
+              [value] = "detail.color"
+              required
+            >
+            {{detail.color}}
+          </label>
+        </div>
+      </div>
+
+    <div ngModelGroup="sizeGroup">
+      <div class="radio" *ngFor="let detail of productDetails">
+          <label>
+            <input
+              type="radio"
+              name="size"
+              [ngModel] = "defaultSize"
+              [value] = "detail.sizeChar"
+              required
+            >
+            {{detail.sizeChar}} / {{detail.sizeNum}}
+          </label>
+      </div>
+    </div>
+
+    <div ngModelGroup="quantityGroup">
+      <button class="btn btn-xs btn-danger">-</button>
+      <input 
+        type="number" 
+        [ngModel] = "1" 
+        size="2"         
+        min="1" 
+        max="99"         
+        name="quantity"
+        required
+      >
+      <button class="btn btn-xs btn-success">+</button>
+    </div>
+
+  </form>
+
+<!--
     <div>
       <div class="container">
         <div class="row">
@@ -40,7 +88,7 @@
       </div>
     </div>
 
-
+  -->
     <footer>
       <button (click)="addToCart()"
         class="btn btn-block">

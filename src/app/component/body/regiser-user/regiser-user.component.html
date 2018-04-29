@@ -4,12 +4,22 @@
 
 <div>
     <form (ngSubmit)="sendRegisterRequest(formData)" #formData = ngForm>
-        Name: <input type="text" ngModel name="name"><br>
-        Mobile: <input type="text" ngModel name="username"><br>
-        Password: <input type="password" ngModel name="password"><br>
-        Confirm Password: <input type="password" ngModel name="password2"><br>
+
+        Name: <input type="text" ngModel name="name" required autofocus><br>
+      
+        Mobile: <input type="text" ngModel name="username" required><br>
+      
+        Password: <input type="password" ngModel name="password" required><br>
+      
+        Confirm Password: <input type="password" ngModel name="password2" required><br>
+      
         <!-- add Address -->
-        <button type="submit">Submit</button>
+      
+        <button 
+          class = "btn btn-primary"
+          [disabled]="!formData.valid"
+          type="submit">
+        Submit</button>
       </form>
       
 </div>

@@ -3,11 +3,17 @@
 </p>
 
 <div>
-  <ul *ngFor='let order of orders'>
-    <app-cart-item [order]=order></app-cart-item>
-  </ul>
+  <table style="width:100%">
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Cost</th>
 
-<div>
+    <tr *ngFor='let order of orders'>
+        <app-cart-item [order]=order></app-cart-item>
+    </tr>
+  </table>
+</div>
 
   <p>
     Total: {{totalAmount}}

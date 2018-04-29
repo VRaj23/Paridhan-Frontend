@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StoreService } from '../../../service/store.service';
 import { DataService } from '../../../service/data.service';
 import { Router } from '@angular/router';
+import { Order } from '../../../model/order.model';
 
 @Component({
   selector: 'app-order',
@@ -9,6 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
+
+  private orders: Array<Order>;
 
   constructor(private storeService: StoreService,
     private dataService: DataService, private router: Router) { }
@@ -21,6 +24,26 @@ export class OrderComponent implements OnInit {
         }
       }
     );
+
+    this.orders = this.storeService.getOrders();
+
+  }
+
+  placeOrder(){
+    console.log("place Order");
+    for(var order of this.orders){
+      this.dataService.postOrders(order).subscribe(
+        (response) => {
+          if(response.status = 201){
+            console.log('Order Placed');
+            this.storeService.resetCart();
+          }else{
+            console.log('Unable to place Order');
+          }
+        }
+      );
+    }
+  
   }
 
 }

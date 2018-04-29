@@ -34,7 +34,7 @@ export class CartDetailComponent implements OnInit {
 
   private calculateTotalAmount(){
     for(var order of this.orders){
-      this.totalAmount = this.totalAmount + order.amount;
+      this.totalAmount = this.totalAmount + order.amount*order.quantity;
     }
   }
 

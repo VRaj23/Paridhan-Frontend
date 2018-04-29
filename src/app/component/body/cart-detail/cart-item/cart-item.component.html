@@ -1,3 +1,6 @@
-<p>
-  {{ order.productLineID }}  {{ order.quantity }} {{order.amount}}
-</p>
+<div style="width:100%">
+    <td>{{ order.productLineID }}</td>
+    <td>{{ order.quantity }}</td>
+    <td>{{ order.amount }}</td>
+    <td>{{ order.quantity * order.amount }}</td>
+</div>
