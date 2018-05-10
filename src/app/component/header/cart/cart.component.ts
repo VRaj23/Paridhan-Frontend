@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StoreService } from '../../../service/store.service';
+import { CartDetailsService } from '../../../service/intercom/cart-details.service';
 
 @Component({
   selector: 'app-cart',
@@ -10,10 +10,10 @@ export class CartComponent implements OnInit {
 
   private itemsInCart: number = 0;
 
-  constructor(private _storeService: StoreService) { }
+  constructor(private cartService: CartDetailsService) { }
 
   ngOnInit() {
-    this._storeService.currentCartCount.subscribe(count => this.itemsInCart = count);
+    this.cartService.currentCartCount.subscribe(count => this.itemsInCart = count);
   }
 
 }

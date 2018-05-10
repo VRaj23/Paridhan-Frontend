@@ -1,6 +1,9 @@
 <p>{{ selectedType.description}}</p>
-<div>
-  <ul *ngFor = 'let header of headerList'>
-    <app-product-header-record [productHeader]= header></app-product-header-record>
-  </ul>
-</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-6 col-lg-3" *ngFor = 'let header of headerList'>
+      <app-product-header-record [productHeader]= header></app-product-header-record>
+    </div>
+  </div>
+</div> 

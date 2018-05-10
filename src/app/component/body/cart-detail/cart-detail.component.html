@@ -2,17 +2,30 @@
   {{itemsInCart}} items in Cart
 </p>
 
-<div>
-  <table style="width:100%">
-    <th>Product</th>
-    <th>Quantity</th>
-    <th>Price</th>
-    <th>Cost</th>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered table-hover">
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Cost</th>
+        </tr>
+        
+        <tr *ngFor='let order of orders'>
+          <!--  
+            edit items in cart
+          -->
+          <td>{{ order.productLineID }}</td>
+          <td>{{ order.quantity }}</td>
+          <td>{{ order.amount }}</td>
+          <td>{{ order.quantity * order.amount }}</td>
+        </tr> 
 
-    <tr *ngFor='let order of orders'>
-        <app-cart-item [order]=order></app-cart-item>
-    </tr>
-  </table>
+      </table>
+    </div>
+  </div>
 </div>
 
   <p>

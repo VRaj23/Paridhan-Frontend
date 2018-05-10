@@ -4,10 +4,13 @@ import { Routes, Router, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
+import { DataService } from './service/data.service';
+import { LoginDetailsService } from './service/intercom/login-details.service';
+import { CartDetailsService } from './service/intercom/cart-details.service';
+import { SelectedProductHeaderService } from './service/intercom/selected-product-header.service';
+import { SelectedProductTypeService } from './service/intercom/selected-product-type.service';
 
 import { AppComponent } from './app.component';
-import { DataService } from './service/data.service';
-import { StoreService } from './service/store.service';
 import { HeaderComponent } from './component/header/header.component';
 import { CartComponent } from './component/header/cart/cart.component';
 import { BodyComponent } from './component/body/body.component';
@@ -26,6 +29,7 @@ import { OrderComponent } from './component/body/order/order.component';
 import { RegiserUserComponent } from './component/body/regiser-user/regiser-user.component';
 import { UserComponent } from './component/header/user/user.component';
 
+
 const appRoutes: Routes = [
   {path: '', component: ProductTypeComponent}
   ,{path: 'product', component: ProductHeaderComponent}
@@ -33,6 +37,7 @@ const appRoutes: Routes = [
   ,{path: 'cart', component: CartDetailComponent}
   ,{path: 'order', component: OrderComponent}
   ,{path: 'login/:backPath', component: LoginComponent}
+  ,{path: 'login', component: LoginComponent}
   ,{path: 'register', component: RegiserUserComponent}
   ,{path: 'user', component: UserComponent}
 ];
@@ -66,7 +71,10 @@ const appRoutes: Routes = [
   ],
   providers: [
     DataService,
-    StoreService
+    LoginDetailsService,
+    CartDetailsService,
+    SelectedProductHeaderService,
+    SelectedProductTypeService
   ],
   bootstrap: [AppComponent]
 })

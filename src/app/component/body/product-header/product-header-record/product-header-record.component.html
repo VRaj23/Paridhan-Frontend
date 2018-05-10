@@ -1,14 +1,16 @@
-<div>
+<div style="border-style: inset">
     <!--<a [routerLink] = "['/product',typeID,productHeader.headerID]">-->
+      
       <a (click)="loadProductDetail()">
+      
+        <div class="col-12">
+          <img src={{imageDownloadAPI+productHeader.imageID}} class="img-fluid img-rounded">
+        </div>
+      
       <div>
-        <p>{{ productHeader.brand }}</p>
+        <p> {{ productHeader.brand }} </p>
+        <p>@ Rs.{{ productHeader.price }} </p>
       </div>
-      <div class="col-12">
-        <img src={{imageDownloadAPI+productHeader.imageID}} class="img-fluid img-rounded">
-      </div>
-      <div>
-        <p> {{ productHeader.price }} </p>
-      </div>
+
     </a>
   </div>

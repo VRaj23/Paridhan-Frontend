@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Order } from '../../../../model/order.model';
+import { OrderRequest } from '../../../../model/order-request.model';
 
 @Component({
   selector: 'app-cart-item',
@@ -8,7 +8,7 @@ import { Order } from '../../../../model/order.model';
 })
 export class CartItemComponent implements OnInit {
 
-  @Input() order: Order;
+  @Input() order: OrderRequest;
 
   constructor() { }
 

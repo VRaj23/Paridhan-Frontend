@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { StoreService } from '../../service/store.service';
 import { DataService } from '../../service/data.service';
+import { Customer } from '../../model/customer.model';
+import { LoginDetailsService } from '../../service/intercom/login-details.service';
 
 @Component({
   selector: 'app-header',
@@ -9,29 +10,31 @@ import { DataService } from '../../service/data.service';
 })
 export class HeaderComponent implements OnInit {
 
-  private user: string = "Login";
+  private cutomer: Customer;
+  private customerName: string = "Login";
 
-  constructor(private storeService: StoreService, private dataService: DataService) { }
+  constructor(private dataService: DataService
+    ,private loginDetailsService: LoginDetailsService) { }
 
   ngOnInit() {
-    this.storeService.getLoginStatus().subscribe(
+    this.loginDetailsService.getLoginStatus().subscribe(
       (status) => {
         if(status){
          this.getName(); 
         }else{
-          this.user="Login";
+          this.customerName="Login";
         }          
       }
     );
   }
 
-  private getName(){
-    this.dataService.getName().subscribe(
-      (response) => {
-        if(response.status == 200)
-          this.user = response.message;
+  private getName(){//TODO need to change
+    this.dataService.getCustomerInfo().subscribe(
+      (res) => {
+        if(res.status == 200)
+          this.cutomer = res.response;
+          this.customerName = this.cutomer.name;
       }
     );
   }
-
 }

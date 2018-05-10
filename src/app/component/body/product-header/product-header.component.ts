@@ -3,8 +3,8 @@ import { DataService } from '../../../service/data.service';
 import { Observable } from 'rxjs/Observable';
 import { ProductHeader } from '../../../model/product-header.model';
 import { ActivatedRoute } from '@angular/router';
-import { StoreService } from '../../../service/store.service';
 import { ProductType } from '../../../model/product-type.model';
+import { SelectedProductTypeService } from '../../../service/intercom/selected-product-type.service';
 
 @Component({
   selector: 'app-product-header',
@@ -16,16 +16,17 @@ export class ProductHeaderComponent implements OnInit {
   private selectedType: ProductType;
   private headerList: Array<ProductHeader>;
 
-  constructor(private _route: ActivatedRoute,private _dateService: DataService
-    ,_store: StoreService) { 
-    this.selectedType = _store.getSelectedType();
+  constructor(private _route: ActivatedRoute
+    ,private dateService: DataService
+    ,private selectedProductTypeService: SelectedProductTypeService) { 
+    this.selectedType = this.selectedProductTypeService.getSelectedType();
   }
 
   ngOnInit() {
-    this._dateService.getProductHeader(this.selectedType.typeID)
+    this.dateService.getProductHeader(this.selectedType.typeID)
       .subscribe(
-        (response) => {
-          this.headerList = response.message
+        (res) => {
+          this.headerList = res.response
         }
       );
   }

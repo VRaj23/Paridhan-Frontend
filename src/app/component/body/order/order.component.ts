@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { StoreService } from '../../../service/store.service';
 import { DataService } from '../../../service/data.service';
 import { Router } from '@angular/router';
-import { Order } from '../../../model/order.model';
+import { OrderRequest } from '../../../model/order-request.model';
+import { LoginDetailsService } from '../../../service/intercom/login-details.service';
+import { CartDetailsService } from '../../../service/intercom/cart-details.service';
 
 @Component({
   selector: 'app-order',
@@ -11,13 +12,14 @@ import { Order } from '../../../model/order.model';
 })
 export class OrderComponent implements OnInit {
 
-  private orders: Array<Order>;
+  private orders: Array<OrderRequest>;
 
-  constructor(private storeService: StoreService,
+  constructor(private loginDetailService: LoginDetailsService,
+    private cartDetailService: CartDetailsService,
     private dataService: DataService, private router: Router) { }
 
   ngOnInit() {
-    this.storeService.getLoginStatus().subscribe(
+    this.loginDetailService.getLoginStatus().subscribe(
       (status) => {
         if(!status){
           this.router.navigate(['login/order']);
@@ -25,18 +27,19 @@ export class OrderComponent implements OnInit {
       }
     );
 
-    this.orders = this.storeService.getOrders();
+    this.orders = this.cartDetailService.getOrders();
 
   }
 
   placeOrder(){
     console.log("place Order");
     for(var order of this.orders){
+      console.log("Placing Order for addressID "+order.deliveryAddressID)
       this.dataService.postOrders(order).subscribe(
-        (response) => {
-          if(response.status = 201){
-            console.log('Order Placed');
-            this.storeService.resetCart();
+        (res) => {
+          if(res.status == 201){
+            console.log('Order Placed '+res.message);
+            this.cartDetailService.resetCart();
           }else{
             console.log('Unable to place Order');
           }

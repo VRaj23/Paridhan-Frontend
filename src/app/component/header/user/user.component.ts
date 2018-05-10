@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { StoreService } from '../../../service/store.service';
 import { Router } from '@angular/router';
 import { DataService } from '../../../service/data.service';
+import { LoginDetailsService } from '../../../service/intercom/login-details.service';
 
 @Component({
   selector: 'app-user',
@@ -12,12 +12,13 @@ export class UserComponent implements OnInit {
 
   private orderCount: number = 0;
 
-  constructor(private storeService: StoreService,private router: Router
+  constructor(private loginService: LoginDetailsService
+    ,private router: Router
     ,private dataService: DataService) { }
 
   ngOnInit() {
 
-    this.storeService.getLoginStatus().subscribe(
+    this.loginService.getLoginStatus().subscribe(
       (status) => {
         if(!status){
           this.router.navigate(['login/user']);
@@ -31,16 +32,16 @@ export class UserComponent implements OnInit {
 
   private getCustomerOrders(){
     this.dataService.getCustomerOrders().subscribe(
-      (response) => {
-        if(Array.isArray(response.message)){
-          this.orderCount = response.message.length;
+      (json) => {
+        if(Array.isArray(json.response)){
+          this.orderCount = json.response.length;
         }
       }
     );
   }
 
   logout(){
-    this.storeService.onLogOut();
+    this.loginService.onLogOut();
     this.router.navigate(['']);
   }
 

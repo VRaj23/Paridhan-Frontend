@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { StoreService } from '../../../service/store.service';
 import { DataService } from '../../../service/data.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginRequest } from '../../../model/login-request.model';
 import { NgForm } from '@angular/forms';
+import { LoginDetailsService } from '../../../service/intercom/login-details.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private storeService: StoreService, private dataService: DataService
+  constructor(private loginDetailService: LoginDetailsService, private dataService: DataService
     ,private router: Router,private activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -26,14 +26,17 @@ export class LoginComponent implements OnInit {
     loginRequest.password = formData.value.password;
     
     this.dataService.postLogin(loginRequest).subscribe(
-      (response) => {
-        if(response.status == 200){
+      (res) => {
+        if(res.status == 200){
           console.log("Login Successful");
-          this.storeService.onLogin(response.message,loginRequest.username.trim());
-          this.router.navigate([this.activeRoute.snapshot.params['backPath']]);
+          this.loginDetailService.onLogin(res.response,loginRequest.username.trim());
+          if(this.activeRoute.snapshot.params['backPath'] == null)
+            this.router.navigate(['']);
+          else
+            this.router.navigate([this.activeRoute.snapshot.params['backPath']]);
         }
         else{
-          console.log(response.status+":"+response.message);
+          console.log(res.status+":"+res.response);
         }
       }
     );

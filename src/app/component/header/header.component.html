@@ -1,32 +1,35 @@
 <div class="container">
   <div class="row">
-    
-    <div role="presentation">
+
+    <div class="col-2" role="presentation">
       <a [routerLink]="['']">
-        <p>Retail Shop</p>
+        <h2>परिधान</h2>
       </a>
     </div>
 
-    <div class="cart row">
+    <div class="col-4">
+      <!--Empty div for spacing-->
+    </div>
 
-      <div role="presentation">
-        <a [routerLink]="['/user']">
-          {{user}}
-        </a>
-      </div>
+    <div class="col-2 col-lg-1" role="presentation">
+      <a>
+        <app-search></app-search>
+      </a>
+    </div>
+
+
+    <div class="col-2 col-lg-1" role="presentation">
+      <a [routerLink]="['/user']">
+        {{customerName}}
+      </a>
+    </div>
       
-      <div role="presentation">
-        <a>
-          <app-search></app-search>
-        </a>
-      </div>
 
-      <div role="presentation">
-        <a [routerLink]="['/cart']">
-          <app-cart></app-cart>
-        </a>
-      </div>
-    
+
+    <div class="col-2 col-lg-1" role="presentation">
+      <a [routerLink]="['/cart']">
+        <app-cart></app-cart>
+      </a>
     </div>
   
   </div>

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ProductHeader } from '../../../../model/product-header.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../../../service/data.service';
-import { StoreService } from '../../../../service/store.service';
+import { SelectedProductHeaderService } from '../../../../service/intercom/selected-product-header.service';
 
 @Component({
   selector: 'app-product-header-record',
@@ -14,14 +14,16 @@ export class ProductHeaderRecordComponent implements OnInit {
   @Input() productHeader: ProductHeader;
   private imageDownloadAPI: string;
 
-  constructor(private _route: ActivatedRoute, private _dataService: DataService
-    ,private _router: Router, private _store: StoreService){
-      this.imageDownloadAPI = this._dataService.getImageDownloadAPI();
+  constructor(private _route: ActivatedRoute
+    ,private dataService: DataService
+    ,private router: Router
+    ,private selectedProductHeaderService: SelectedProductHeaderService){
+      this.imageDownloadAPI = this.dataService.getImageDownloadAPI();
   } 
 
   loadProductDetail(){
-    this._store.setSelectedProductHeader(this.productHeader);
-    this._router.navigate(['/detail']);
+    this.selectedProductHeaderService.setSelectedProductHeader(this.productHeader);
+    this.router.navigate(['/detail']);
   }
 
   ngOnInit() {

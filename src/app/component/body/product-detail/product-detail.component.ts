@@ -5,10 +5,12 @@ import { DataService } from '../../../service/data.service';
 import { Observable } from 'rxjs/Observable';
 import { ProductHeader } from '../../../model/product-header.model';
 import { ProductType } from '../../../model/product-type.model';
-import { StoreService } from '../../../service/store.service';
-import { Order } from '../../../model/order.model';
 import { Subscription } from 'rxjs/Subscription';
 import { NgForm } from '@angular/forms';
+import { OrderRequest } from '../../../model/order-request.model';
+import { SelectedProductTypeService } from '../../../service/intercom/selected-product-type.service';
+import { SelectedProductHeaderService } from '../../../service/intercom/selected-product-header.service';
+import { CartDetailsService } from '../../../service/intercom/cart-details.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -25,21 +27,22 @@ export class ProductDetailComponent implements OnInit {
   private itemsInCart: number = 0;
   private defaultColor: string;
   private defaultSize: string;
-
+  
   @ViewChild("formData") formData: NgForm;
 
-  constructor(private route: ActivatedRoute,private dataService: DataService
-    ,private store: StoreService) {
-      this.selectedProductHeader = store.getSelectedProductHeader(); 
-      this.selectedType = store.getSelectedType();
+  constructor(private route: ActivatedRoute
+    ,private dataService: DataService
+    ,private selectedProductTypeService: SelectedProductTypeService
+    ,private selectedProductHeaderService: SelectedProductHeaderService
+    ,private cartService: CartDetailsService
+  ) {
+      this.selectedProductHeader = this.selectedProductHeaderService.getSelectedProductHeader(); 
+      this.selectedType = this.selectedProductTypeService.getSelectedType();
       this.imageDownload = dataService.getImageDownloadAPI()+this.selectedProductHeader.imageID; 
   }
 
   private addToCart(){
-    var order = new Order();
     
-    order.quantity = this.formData.value.quantityGroup.quantity;
-
     var color = this.formData.value.colorGroup.color;
     var size = this.formData.value.sizeGroup.size; 
     
@@ -48,24 +51,29 @@ export class ProductDetailComponent implements OnInit {
         return line.color == color && line.sizeChar == size;
       }
     );
-    order.productLineID = selectedLine.lineID;
 
     var price = this.selectedProductHeader.price;
     var discout = this.selectedProductHeader.discount;
-    order.amount = price - price*(discout/100);
 
-    this.store.addOrder(order);
+    var order: OrderRequest = {
+      amount: price - price*(discout/100)
+      ,deliveryAddressID: 124//TODO change
+      ,productLineID: selectedLine.lineID
+      ,quantity: this.formData.value.quantityGroup.quantity
+    }
+
+    this.cartService.addOrder(order);
   }
 
   ngOnInit() {
 
-    this.cartCountSubscription = this.store.currentCartCount
+    this.cartCountSubscription = this.cartService.currentCartCount
       .subscribe(count => this.itemsInCart = count);
 
     this.dataService.getProductDetail(this.selectedProductHeader.headerID.toString())
       .subscribe(
-        (response) => {
-          this.productDetails = response.message;
+        (res) => {
+          this.productDetails = res.response;
           this.defaultColor = this.productDetails[0].color;
           this.defaultSize = this.productDetails[0].sizeChar;
         }

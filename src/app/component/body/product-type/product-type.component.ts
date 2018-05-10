@@ -19,7 +19,7 @@ export class ProductTypeComponent implements OnInit {
   ngOnInit() {
     this._dataService.getProductType().subscribe(
       (jsonResponse) => {
-        this.productTypeList = jsonResponse.message;
+        this.productTypeList = jsonResponse.response;
       }
     );
 

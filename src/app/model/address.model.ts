@@ -1,6 +1,11 @@
 export class Address{
 
-    address: string;
+    addressID: number;
+    area: string;
+    cityName: string;
+    houseNumber: string;
+    landmark: string;
     pincode: number;
-    city: string;
+    stateName: string;
+    
 }

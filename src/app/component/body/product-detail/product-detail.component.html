@@ -1,13 +1,13 @@
-<div class="content">
+<div class="wrapper">
 
     <div>
-      <a [routerLink]="['/product']">Back to {{selectedType.description}}s</a>
+      <a [routerLink]="['/product']">Back to {{selectedType.description}}</a>
     </div>
-  
+  <!---->
     <div>
       <img src={{imageDownload}} class="img-fluid img-rounded"> 
     </div>
-  
+ <!-- -->
     <div>
       <p>{{selectedProductHeader.brand}} {{selectedType.description}} @ Rs.{{selectedProductHeader.price}}</p>
     </div>
@@ -59,6 +59,14 @@
 
   </form>
 
+  <footer class="myfooter">
+    <button (click)="addToCart()"
+      class="btn btn-block">
+      Add to Cart
+    </button>
+  </footer>
+
+</div>
 <!--
     <div>
       <div class="container">
@@ -89,11 +97,3 @@
     </div>
 
   -->
-    <footer>
-      <button (click)="addToCart()"
-        class="btn btn-block">
-        Add to Cart
-      </button>
-    </footer>
-
-  </div>

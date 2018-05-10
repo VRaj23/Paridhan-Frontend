@@ -2,11 +2,29 @@
 <p>Address</p>
 
 <p>Order Summary</p>
-<table>
-  <tr *ngFor="let order of orders">
-      <app-cart-item [order]=order></app-cart-item>
-  </tr>
-</table>
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+        <table class="table table-bordered table-hover">
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Cost</th>
+          </tr>
+          
+          <tr *ngFor='let order of orders'>
+            <!--  <app-cart-item [order]=order></app-cart-item> -->
+            <td>{{ order.productLineID }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>{{ order.amount }}</td>
+            <td>{{ order.quantity * order.amount }}</td>
+          </tr> 
+  
+        </table>
+      </div>
+    </div>
+  </div>
 
 <button 
   class="btn btn-large"

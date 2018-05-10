@@ -1,8 +1,9 @@
-import { Address } from '../model/address.model';
+import { AddressCreationRequest } from './address-creation-request.model';
 
 export class RegisterRequest{
     username: string;
     password: string;
     name: string;
-    address: Address;
+    email: string;
+    address: AddressCreationRequest;
 }

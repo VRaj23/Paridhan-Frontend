@@ -3,6 +3,7 @@ import { RegisterRequest } from '../../../model/register-request.model';
 import { DataService } from '../../../service/data.service';
 import { JsonResponse } from '../../../model/json-response.model';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-regiser-user',
@@ -11,7 +12,8 @@ import { NgForm } from '@angular/forms';
 })
 export class RegiserUserComponent implements OnInit {
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService
+    ,private router: Router) { }
 
   ngOnInit() {
   }
@@ -26,6 +28,9 @@ export class RegiserUserComponent implements OnInit {
     this.dataService.postRegister(request).subscribe(
       (response) => {
         console.log(response.message);
+        if(response.status == 201){
+          this.router.navigate(['login']);
+        }
       }
     );
     
