@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProductDetailSizeComponent } from './product-detail-size.component';
+import { ColorSizePickerComponent } from './color-size-picker.component';
 
-describe('ProductDetailSizeComponent', () => {
-  let component: ProductDetailSizeComponent;
-  let fixture: ComponentFixture<ProductDetailSizeComponent>;
+describe('ColorSizePickerComponent', () => {
+  let component: ColorSizePickerComponent;
+  let fixture: ComponentFixture<ColorSizePickerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductDetailSizeComponent ]
+      declarations: [ ColorSizePickerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProductDetailSizeComponent);
+    fixture = TestBed.createComponent(ColorSizePickerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

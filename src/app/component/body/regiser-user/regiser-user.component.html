@@ -8,15 +8,30 @@
         Name: <input type="text" ngModel name="name" required autofocus><br>
       
         Mobile: <input type="text" ngModel name="username" required><br>
+
+        E-mail (optional): <input type="email" ngModel name="email"><br>
       
         Password: <input type="password" ngModel name="password" required><br>
       
         Confirm Password: <input type="password" ngModel name="password2" required><br>
       
-        <!-- add Address -->
+        <h6>Address</h6>
+
+        HouseNumber: <input type="text" ngModel name="houseNumber" required><br>
+
+        Area/Colony: <input type="text" ngModel name="area" required><br>
+
+        Landmark (optional): <input type="text" ngModel name="landmark"><br>  
+        
+        <select ngModel name="city" required>
+          <option value="" disabled selected>Select City</option>
+          <option *ngFor='let city of cityList'>{{city.cityName+", "+city.stateName}}</option>
+        </select>
+
+       <br>
+        Pincode: <input type="number" ngModel name="pincode" required><br>
       
-        <button 
-          class = "btn btn-primary"
+        <button
           [disabled]="!formData.valid"
           type="submit">
         Submit</button>

@@ -19,8 +19,6 @@ import { ProductHeaderComponent } from './component/body/product-header/product-
 import { ProductDetailComponent } from './component/body/product-detail/product-detail.component';
 import { ProductTypeRecordComponent } from './component/body/product-type/product-type-record/product-type-record.component';
 import { ProductHeaderRecordComponent } from './component/body/product-header/product-header-record/product-header-record.component';
-import { ProductDetailColorComponent } from './component/body/product-detail/product-detail-color/product-detail-color.component';
-import { ProductDetailSizeComponent } from './component/body/product-detail/product-detail-size/product-detail-size.component';
 import { CartDetailComponent } from './component/body/cart-detail/cart-detail.component';
 import { SearchComponent } from './component/header/search/search.component';
 import { CartItemComponent } from './component/body/cart-detail/cart-item/cart-item.component';
@@ -28,6 +26,7 @@ import { LoginComponent } from './component/body/login/login.component';
 import { OrderComponent } from './component/body/order/order.component';
 import { RegiserUserComponent } from './component/body/regiser-user/regiser-user.component';
 import { UserComponent } from './component/header/user/user.component';
+import { ColorSizePickerComponent } from './component/body/product-detail/color-size-picker/color-size-picker.component';
 
 
 const appRoutes: Routes = [
@@ -53,15 +52,14 @@ const appRoutes: Routes = [
     ProductDetailComponent,
     ProductTypeRecordComponent,
     ProductHeaderRecordComponent,
-    ProductDetailColorComponent,
-    ProductDetailSizeComponent,
     CartDetailComponent,
     SearchComponent,
     CartItemComponent,
     LoginComponent,
     OrderComponent,
     RegiserUserComponent,
-    UserComponent
+    UserComponent,
+    ColorSizePickerComponent
   ],
   imports: [
     BrowserModule,

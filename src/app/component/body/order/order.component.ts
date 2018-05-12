@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { OrderRequest } from '../../../model/order-request.model';
 import { LoginDetailsService } from '../../../service/intercom/login-details.service';
 import { CartDetailsService } from '../../../service/intercom/cart-details.service';
+import { Address } from '../../../model/address.model';
+import { Customer } from '../../../model/customer.model';
+import { CartItem } from '../../../model/cart-item.model';
 
 @Component({
   selector: 'app-order',
@@ -12,7 +15,12 @@ import { CartDetailsService } from '../../../service/intercom/cart-details.servi
 })
 export class OrderComponent implements OnInit {
 
-  private orders: Array<OrderRequest>;
+  private cartItems: CartItem[] = [];
+  private orders: OrderRequest[] = [];
+  private deliveryAddress: Address = new  Address();
+  private customerName: string;
+  private customerContact: string;
+  private placeOrderDisabled: boolean = false;
 
   constructor(private loginDetailService: LoginDetailsService,
     private cartDetailService: CartDetailsService,
@@ -23,22 +31,30 @@ export class OrderComponent implements OnInit {
       (status) => {
         if(!status){
           this.router.navigate(['login/order']);
+        }else{
+          this.dataService.getCustomerInfo().subscribe(
+            (json)=>{
+              this.deliveryAddress = json.response.addressResponse;
+            }
+          );
         }
       }
     );
-
-    this.orders = this.cartDetailService.getOrders();
-
+    this.cartItems = this.cartDetailService.getItemsInCart();
   }
 
   placeOrder(){
-    console.log("place Order");
+    this.placeOrderDisabled = true;
+    console.log("placing Order");
+    this.prepareOrders();
+    
     for(var order of this.orders){
-      console.log("Placing Order for addressID "+order.deliveryAddressID)
       this.dataService.postOrders(order).subscribe(
-        (res) => {
-          if(res.status == 201){
-            console.log('Order Placed '+res.message);
+        (json) => {
+          if(json.status == 201){
+            console.log('Order Placed '+json.message);
+            this.orders=[]
+            this.placeOrderDisabled = false;
             this.cartDetailService.resetCart();
           }else{
             console.log('Unable to place Order');
@@ -46,7 +62,17 @@ export class OrderComponent implements OnInit {
         }
       );
     }
-  
+  }
+
+  prepareOrders(){
+    for(var item of this.cartItems){
+      this.orders.push(new OrderRequest(
+        item.product.lineID
+        ,this.deliveryAddress.addressID
+        ,item.quantity
+        ,item.price * item.quantity
+      ));
+    }
   }
 
 }

@@ -11,6 +11,7 @@ import { OrderRequest } from '../../../model/order-request.model';
 import { SelectedProductTypeService } from '../../../service/intercom/selected-product-type.service';
 import { SelectedProductHeaderService } from '../../../service/intercom/selected-product-header.service';
 import { CartDetailsService } from '../../../service/intercom/cart-details.service';
+import { CartItem } from '../../../model/cart-item.model';
 
 @Component({
   selector: 'app-product-detail',
@@ -25,8 +26,9 @@ export class ProductDetailComponent implements OnInit {
   private imageDownload: string;
   private cartCountSubscription: Subscription;
   private itemsInCart: number = 0;
-  private defaultColor: string;
-  private defaultSize: string;
+  private quantity = 1;
+  private selectedProductLine: number = 0;
+  private disableAddToCartButton: boolean = true;
   
   @ViewChild("formData") formData: NgForm;
 
@@ -41,30 +43,6 @@ export class ProductDetailComponent implements OnInit {
       this.imageDownload = dataService.getImageDownloadAPI()+this.selectedProductHeader.imageID; 
   }
 
-  private addToCart(){
-    
-    var color = this.formData.value.colorGroup.color;
-    var size = this.formData.value.sizeGroup.size; 
-    
-    var selectedLine: ProductDetail = this.productDetails.find(
-      (line: ProductDetail) =>{
-        return line.color == color && line.sizeChar == size;
-      }
-    );
-
-    var price = this.selectedProductHeader.price;
-    var discout = this.selectedProductHeader.discount;
-
-    var order: OrderRequest = {
-      amount: price - price*(discout/100)
-      ,deliveryAddressID: 124//TODO change
-      ,productLineID: selectedLine.lineID
-      ,quantity: this.formData.value.quantityGroup.quantity
-    }
-
-    this.cartService.addOrder(order);
-  }
-
   ngOnInit() {
 
     this.cartCountSubscription = this.cartService.currentCartCount
@@ -72,20 +50,50 @@ export class ProductDetailComponent implements OnInit {
 
     this.dataService.getProductDetail(this.selectedProductHeader.headerID.toString())
       .subscribe(
-        (res) => {
-          this.productDetails = res.response;
-          this.defaultColor = this.productDetails[0].color;
-          this.defaultSize = this.productDetails[0].sizeChar;
+        (json) => {
+          this.productDetails = json.response;
         }
       );
   }
 
-  ngOnDestory(){
-    this.cartCountSubscription.unsubscribe();
+  receiveSelectedProductLine($event){
+    if($event != -1){
+      this.selectedProductLine = $event;
+      this.disableAddToCartButton = false;
+    }else{
+      this.disableAddToCartButton = true;
+    }
   }
 
-  onChildClick(obj){
-    //console.log("value: "+obj.value+" Type: "+obj.type);
+  getProductDetail(): ProductDetail{
+    for(var product of this.productDetails){
+      if(product.lineID == this.selectedProductLine)
+        return product;
+    }
+  }
+
+  onQuantityIncrement(){
+    this.quantity++;
+  }
+
+  onQuantityDecrement(){
+    if(this.quantity>1)
+      this.quantity--;
+  }
+
+  private addToCart(){
+
+    var price = this.selectedProductHeader.price;
+    var discount = this.selectedProductHeader.discount;
+    price = price - price*(discount/100);
+
+    var item: CartItem = new CartItem(this.getProductDetail(),this.quantity,price);
+
+    this.cartService.addCartItem(item);
+  }
+
+  ngOnDestory(){
+    this.cartCountSubscription.unsubscribe();
   }
 
 }

@@ -30,9 +30,9 @@ export class HeaderComponent implements OnInit {
 
   private getName(){//TODO need to change
     this.dataService.getCustomerInfo().subscribe(
-      (res) => {
-        if(res.status == 200)
-          this.cutomer = res.response;
+      (json) => {
+        if(json.status == 200)
+          this.cutomer = json.response;
           this.customerName = this.cutomer.name;
       }
     );

@@ -26,17 +26,17 @@ export class LoginComponent implements OnInit {
     loginRequest.password = formData.value.password;
     
     this.dataService.postLogin(loginRequest).subscribe(
-      (res) => {
-        if(res.status == 200){
+      (json) => {
+        if(json.status == 200){
           console.log("Login Successful");
-          this.loginDetailService.onLogin(res.response,loginRequest.username.trim());
+          this.loginDetailService.onLogin(json.response);
           if(this.activeRoute.snapshot.params['backPath'] == null)
             this.router.navigate(['']);
           else
             this.router.navigate([this.activeRoute.snapshot.params['backPath']]);
         }
         else{
-          console.log(res.status+":"+res.response);
+          console.log(json.status+":"+json.message);
         }
       }
     );

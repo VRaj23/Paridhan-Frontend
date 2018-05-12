@@ -1,99 +1,58 @@
-<div class="wrapper">
-
     <div>
       <a [routerLink]="['/product']">Back to {{selectedType.description}}</a>
     </div>
-  <!---->
-    <div>
+
+    <div style="text-align:center">
       <img src={{imageDownload}} class="img-fluid img-rounded"> 
     </div>
- <!-- -->
+
     <div>
       <p>{{selectedProductHeader.brand}} {{selectedType.description}} @ Rs.{{selectedProductHeader.price}}</p>
     </div>
 
-    <form #formData="ngForm">
-      <div ngModelGroup="colorGroup">
-        <div class="radio" *ngFor="let detail of productDetails">
-          <label>
-            <input
-              type="radio"
-              name="color"
-              [ngModel] = "defaultColor" 
-              [value] = "detail.color"
-              required
-            >
-            {{detail.color}}
-          </label>
+    <div>
+      <app-color-size-picker 
+        (productLineSelectedEvent) = "receiveSelectedProductLine($event)"
+        [productDetailList] = "productDetails">
+      </app-color-size-picker>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col-3"></div>
+
+      <div class="col-6">
+        <div class="row">
+
+          <button 
+            (click)="onQuantityDecrement()"
+            class="col-2 btn btn-xs btn-danger">
+            -</button>
+
+          <p class="col-2 text-center"> {{quantity}} </p>
+
+          <button 
+            (click)="onQuantityIncrement()"
+            class="col-2 btn btn-xs btn-success">
+            +</button>   
+
         </div>
       </div>
 
-    <div ngModelGroup="sizeGroup">
-      <div class="radio" *ngFor="let detail of productDetails">
-          <label>
-            <input
-              type="radio"
-              name="size"
-              [ngModel] = "defaultSize"
-              [value] = "detail.sizeChar"
-              required
-            >
-            {{detail.sizeChar}} / {{detail.sizeNum}}
-          </label>
-      </div>
+      <div class="col-3"></div>
     </div>
 
-    <div ngModelGroup="quantityGroup">
-      <button class="btn btn-xs btn-danger">-</button>
-      <input 
-        type="number" 
-        [ngModel] = "1" 
-        size="2"         
-        min="1" 
-        max="99"         
-        name="quantity"
-        required
-      >
-      <button class="btn btn-xs btn-success">+</button>
-    </div>
 
-  </form>
 
   <footer class="myfooter">
     <button (click)="addToCart()"
+      [disabled] = "disableAddToCartButton"
       class="btn btn-block">
-      Add to Cart
+      Add to Cart     
+      <img 
+      src="./assets/cart.svg" 
+      width="20px" 
+      height="20px">
     </button>
   </footer>
-
-</div>
-<!--
-    <div>
-      <div class="container">
-        <div class="row">
-          <div class="col-2" *ngFor = 'let detail of productDetails'>
-            <app-product-detail-color
-            [detailValue]=detail.color
-            [detailType] = "typeColor"
-            (eventEmitter) = "onChildClick($event)"
-              ></app-product-detail-color>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="container">
-        <div class="row">
-          <div class="col-2" *ngFor = 'let detail of productDetails'>
-            <app-product-detail-color
-            [detailValue]=detail.sizeChar
-            [detailType] = "typeSize"
-            (eventEmitter) = "onChildClick($event)"
-              ></app-product-detail-color>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  -->

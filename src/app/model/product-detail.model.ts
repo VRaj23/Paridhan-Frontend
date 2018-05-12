@@ -3,4 +3,5 @@ export class ProductDetail{
     color: string;
     sizeNum: number;
     sizeChar: string;
+    productName: string;
 }

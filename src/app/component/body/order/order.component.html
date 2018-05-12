@@ -1,5 +1,11 @@
 
-<p>Address</p>
+<div>
+  <h4>Delivery Address:</h4>
+  <p>{{deliveryAddress.houseNumber}}</p> <p> {{deliveryAddress.area}}</p>
+  <p>{{deliveryAddress.landmark}}</p>
+  <p>{{deliveryAddress.cityName}}, {{deliveryAddress.stateName}}</p>
+  <p>Pincode: {{deliveryAddress.pincode}}</p>
+</div>
 
 <p>Order Summary</p>
 <div class="container">
@@ -28,6 +34,7 @@
 
 <button 
   class="btn btn-large"
+  [disabled] = "placeOrderDisabled"
   (click)="placeOrder()"
 >Place Order</button>
 

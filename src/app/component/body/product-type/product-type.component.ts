@@ -14,12 +14,12 @@ export class ProductTypeComponent implements OnInit {
   typeList$: Observable<Array<ProductType>>;
   productTypeList: Array<any>;
 
-  constructor(private _dataService: DataService) { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this._dataService.getProductType().subscribe(
-      (jsonResponse) => {
-        this.productTypeList = jsonResponse.response;
+    this.dataService.getProductType().subscribe(
+      (json) => {
+        this.productTypeList = json.response;
       }
     );
 

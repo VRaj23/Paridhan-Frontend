@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartDetailsService } from '../../../service/intercom/cart-details.service';
-import { OrderRequest } from '../../../model/order-request.model';
+import { CartItem } from '../../../model/cart-item.model';
 
 @Component({
   selector: 'app-cart-detail',
@@ -12,14 +12,14 @@ export class CartDetailComponent implements OnInit {
 
   private itemsInCart: number = 0;
   private totalAmount: number = 0;
-  private orders: OrderRequest[] = [];
+  private cartItems: CartItem[] = [];
 
   constructor(private cartDetailsService: CartDetailsService,private router: Router) { 
     this.cartDetailsService.currentCartCount.subscribe(count => this.itemsInCart = count);
   }
 
   ngOnInit() {
-    this.orders = this.cartDetailsService.getOrders();
+    this.cartItems = this.cartDetailsService.getItemsInCart();
     this.calculateTotalAmount();
   }
 
@@ -33,8 +33,8 @@ export class CartDetailComponent implements OnInit {
   }
 
   private calculateTotalAmount(){
-    for(var order of this.orders){
-      this.totalAmount = this.totalAmount + order.amount*order.quantity;
+    for(var item of this.cartItems){
+      this.totalAmount = this.totalAmount + item.price * item.quantity;
     }
   }
 

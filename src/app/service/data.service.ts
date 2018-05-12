@@ -13,10 +13,10 @@ import { LoginDetailsService } from './intercom/login-details.service';
 
 @Injectable()
 export class DataService {
-  //private backendAPI: string = "http://localhost:8080";
+  private backendAPI: string = "http://localhost:8080";
   //private backendAPI: string = "https://192.168.1.3:8080";
   //private backendAPI: string = "http://192.168.43.123:8080";
-  private backendAPI: string = "http://192.168.56.102:8080";
+  //private backendAPI: string = "http://192.168.56.102:8080";
   private productHeaderAPI: string = "/product/header";
   private productTypeAPI: string = "/product/type";
   private imageDownloadAPI: string = "/product/downloadImage/";
@@ -26,6 +26,7 @@ export class DataService {
   private customerInfoAPI: string = "/auth/customer/info";
   private customerAddOrderAPI: string = "/auth/customer/order/addOrder";
   private customerOrdersAPI: string = "/auth/customer/order/getAll";
+  private getCitiesAPI: string ="/address/cities";
 
   constructor(private http: HttpClient, private loginDetailService: LoginDetailsService) { 
   }
@@ -34,6 +35,9 @@ export class DataService {
     return this.http.get<JsonResponse>(this.backendAPI + this.productTypeAPI);
   }
 
+  getCities(): Observable<JsonResponse>{
+    return this.http.get<JsonResponse>(this.backendAPI + this.getCitiesAPI);
+  }
 
   getProductHeader(typeID: number): Observable<JsonResponse>{
     return this.http.get<JsonResponse>
@@ -77,4 +81,6 @@ export class DataService {
     return this.http.get<JsonResponse>(this.backendAPI + this.customerOrdersAPI
       ,this.getHeaderWithToken() );
   }
+
+
 }

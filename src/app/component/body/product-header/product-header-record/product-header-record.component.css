@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'Baloo';
+    src: url('../../../../../assets/fonts/baloo.ttf')  format('truetype');
+}
+
 .mystyle{
     border-style: inset;
+}
+
+.custom-font{
+    font-family: Baloo;
 }

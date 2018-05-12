@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Lobster';
+    src: url('../../../../assets/fonts/lobster.ttf')  format('truetype');
+}
+
+.custom-font{
+    font-family: Lobster;
+}

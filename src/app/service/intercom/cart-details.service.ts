@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { OrderRequest } from '../../model/order-request.model';
+import { CartItem } from '../../model/cart-item.model';
 
 @Injectable()
 export class CartDetailsService {
 
   constructor() { }
 
-  private orders: OrderRequest[] = [];
+  private itemsInCart: CartItem[] = [];
   private cartCount = new BehaviorSubject<number>(0);
 
   currentCartCount = this.cartCount.asObservable();
@@ -18,16 +19,17 @@ export class CartDetailsService {
 
   resetCart(){
     this.cartCount.next(0);
-    this.orders = [];
+    this.itemsInCart = [];
     
   } 
-  addOrder(order: OrderRequest){
-    this.orders.push(order);
-    this.add2Cart(this.orders.length)
+
+  addCartItem(cartItem: CartItem){
+    this.itemsInCart.push(cartItem);
+    this.add2Cart(this.itemsInCart.length);
   }
 
-  getOrders(): Array<OrderRequest>{
-    return this.orders;
+  getItemsInCart(): Array<CartItem>{
+    return this.itemsInCart;
   }
 
 }

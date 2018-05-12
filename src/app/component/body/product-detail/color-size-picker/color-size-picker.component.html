@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div *ngFor = 'let color of colorSet'>
+      <button 
+        [ngClass]="{enabled: color.state == 'enabled' 
+          , selected: color.state == 'selected' 
+          , disabled: color.state == 'disabled'}"
+        [ngStyle]="{backgroundColor: getColor(color.value)}"
+        (click)="onColorButtonClick(color.value)">
+      </button>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="container">
+  <div class="row">
+    <div *ngFor = 'let size of sizeSet'>
+      <button
+        [ngClass]="{enabled: size.state == 'enabled' 
+          , selected: size.state == 'selected' 
+          , disabled: size.state == 'disabled'}"
+        (click) = "onSizeButtonClick(size.value)"
+      >{{size.value}}</button>
+    </div>
+  </div>
+</div>

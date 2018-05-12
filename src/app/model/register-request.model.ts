@@ -5,5 +5,14 @@ export class RegisterRequest{
     password: string;
     name: string;
     email: string;
-    address: AddressCreationRequest;
+    addressCreationRequest: AddressCreationRequest;
+
+    constructor(username: string, password: string, name: string
+        , email: string, address: AddressCreationRequest){
+            this.username = username;
+            this.password = password;
+            this.name = name;
+            this.email = email;
+            this.addressCreationRequest = address;
+    }
 }
