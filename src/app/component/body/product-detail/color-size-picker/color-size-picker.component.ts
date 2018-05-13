@@ -36,9 +36,20 @@ export class ColorSizePickerComponent implements OnInit {
 
   initColorSizeSets() {
     for(var product of this.productDetailList){
-      this.colorSet.push(new ValueStateSet(product.color));
-      this.sizeSet.push(new ValueStateSet(product.sizeChar));
+      if(! this.existsInSet(product.color, this.getSet(TYPE.COLOR)))
+        this.colorSet.push(new ValueStateSet(product.color));
+
+      if(! this.existsInSet(product.sizeChar, this.getSet(TYPE.SIZE)))
+        this.sizeSet.push(new ValueStateSet(product.sizeChar));
     }
+  }
+
+  existsInSet(value: string, set: ValueStateSet[]): boolean{
+    for(var item of set){
+      if(item.value == value)
+        return true;
+    }
+    return false;
   }
 
   initDictionary(list: ProductDetail[]){

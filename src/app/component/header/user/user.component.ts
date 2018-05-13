@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../../../service/data.service';
 import { LoginDetailsService } from '../../../service/intercom/login-details.service';
+import { OrderResponse } from '../../../model/order-response.model';
+import { Customer } from '../../../model/customer.model';
 
 @Component({
   selector: 'app-user',
@@ -11,6 +13,9 @@ import { LoginDetailsService } from '../../../service/intercom/login-details.ser
 export class UserComponent implements OnInit {
 
   private orderCount: number = 0;
+  private orderedList: OrderResponse[] = [];
+  private customer: Customer = new Customer();
+  private loginStatus: boolean = false;
 
   constructor(private loginService: LoginDetailsService
     ,private router: Router
@@ -24,6 +29,7 @@ export class UserComponent implements OnInit {
           this.router.navigate(['login/user']);
         }else{
           this.getCustomerOrders();
+          this.getCustomerInfo();
         }
       }
     );
@@ -35,7 +41,17 @@ export class UserComponent implements OnInit {
       (json) => {
         if(Array.isArray(json.response)){
           this.orderCount = json.response.length;
+          this.orderedList = json.response;
         }
+      }
+    );
+  }
+
+  private getCustomerInfo(){
+    this.dataService.getCustomerInfo().subscribe(
+      (json) => {
+        this.customer = json.response;
+        this.loginStatus = true;
       }
     );
   }

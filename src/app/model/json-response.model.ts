@@ -1,5 +1,5 @@
-export class JsonResponse{
+export class JsonResponse<T>{
     status: number;
     message: string;
-    response: any;
+    response: T;
 }

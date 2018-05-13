@@ -3,21 +3,33 @@
 </p>
 
 <form (ngSubmit)="login(formData)" #formData = ngForm>
+
+  <div class="form-group">
+    <label>Mobile</label>
+    <input type="text" class="form-control" ngModel name="username" required autofocus><br>
+  </div>
+
   
-  Mobile: <input type="text" ngModel name="username" required autofocus><br>
-  
-  Password: <input type="password" ngModel name="password" required><br>
-  
-  <button 
-    class="btn btn-primary"
-    type="submit"
-    [disabled]="!formData.valid">
-  Login</button>
+  <div class="form-group">
+    <label>Password</label> 
+    <input type="password" class="form-control" ngModel name="password" required><br>
+  </div>
+
+
+  <div class="form-group">
+    <button 
+      class="btn btn-default"
+      type="submit"
+      [disabled]="!formData.valid">
+    Login</button>
+  </div>
 
 </form>
 
 <br>
-<br>
-<div>
-  <button (click)="newUser()">New User? Register</button>
+
+<div class="form-row text-center">
+  <div class="col-12">
+    <button class="btn btn-primary" (click)="newUser()">New User? Register</button>
+  </div>
 </div>

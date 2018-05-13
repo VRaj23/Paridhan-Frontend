@@ -6,3 +6,9 @@
 .lobster{
     font-family: Lobster;
 }
+
+.border-style{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-style: ridge;
+}

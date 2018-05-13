@@ -1,9 +1,35 @@
-<p>
-  User's Page
-</p>
+<div *ngIf="loginStatus; else loading">
 
-<div>
-  <button (click)=logout()>Logout</button>
+  <h3>Welcome {{customer.name}}</h3>
+  
+  <div>
+    <button (click)=logout()>Logout</button>
+  </div>
+  
+  <br>
+  
+  <div>
+    <div class="row">
+      <h4 class="col-6">Saved Address</h4>
+      <button class="col-2 btn btn-xs" [disabled]="true">Edit</button>
+    </div>
+    <p>{{customer.addressResponse.houseNumber}}, {{customer.addressResponse.area}}</p>
+    <p>{{customer.addressResponse.landmark}}</p>
+    <p>{{customer.addressResponse.cityName}}, {{customer.addressResponse.stateName}}</p>
+    <p>{{customer.addressResponse.pincode}}</p>
+  </div>
+  
+  <br>
+  
+  <h4> You have placed {{orderCount}} orders</h4>
+  <div *ngFor = 'let order of orderedList'>
+    <app-user-ordered-item [order] = order></app-user-ordered-item>
+  </div>
+
 </div>
-<hr>
-<p> You have placed {{orderCount}} orders</p>
+
+<ng-template #loading>
+  <div class="text-center">
+    <p>Loading User Details..</p>
+  </div>
+</ng-template>

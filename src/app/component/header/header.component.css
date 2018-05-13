@@ -11,3 +11,7 @@
 .side_margin{
     margin: 0 5%;
 }
+
+.float-right{
+    float: right;
+}

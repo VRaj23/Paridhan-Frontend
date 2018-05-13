@@ -1,40 +1,55 @@
-<p>
-  Create Account
-</p>
+<h3>Welcome New User</h3>
 
 <div>
     <form (ngSubmit)="sendRegisterRequest(formData)" #formData = ngForm>
+        <div class="form-group">
+          <label>Name</label> 
+          <input class="form-control" type="text" ngModel name="name" required autofocus>
 
-        Name: <input type="text" ngModel name="name" required autofocus><br>
-      
-        Mobile: <input type="text" ngModel name="username" required><br>
+          <label>Mobile</label>
+          <input class="form-control" type="text" ngModel name="username" required>
 
-        E-mail (optional): <input type="email" ngModel name="email"><br>
-      
-        Password: <input type="password" ngModel name="password" required><br>
-      
-        Confirm Password: <input type="password" ngModel name="password2" required><br>
-      
-        <h6>Address</h6>
+          <label>E-mail (optional)</label>
+          <input class="form-control" type="email" ngModel name="email">
 
-        HouseNumber: <input type="text" ngModel name="houseNumber" required><br>
+          <label>Password</label>
+          <input class="form-control" type="password" ngModel name="password" required>
 
-        Area/Colony: <input type="text" ngModel name="area" required><br>
+          <label>Confirm Password</label> 
+          <input class="form-control" type="password" ngModel name="password2" required>
+        </div>
 
-        Landmark (optional): <input type="text" ngModel name="landmark"><br>  
+        <h5>Address</h5>
+
+        <div class="form-group">
+          <label>House/Flat Number</label>
+          <input class="form-control" type="text" ngModel name="houseNumber" required>
+
+          <label>Area/Colony</label>
+          <input class="form-control" type="text" ngModel name="area" required>
+
+          <label>Landmark (optional)</label>
+          <input class="form-control" type="text" ngModel name="landmark">
+
+          <select ngModel name="city" required>
+            <option value="" disabled selected>Select City</option>
+            <option *ngFor='let city of cityList'>{{city.cityName+", "+city.stateName}}</option>
+          </select>
+          
+          <br>
+
+          <label>Pincode</label>
+          <input class="form-control" type="number" ngModel name="pincode" required>
+
+        </div>
         
-        <select ngModel name="city" required>
-          <option value="" disabled selected>Select City</option>
-          <option *ngFor='let city of cityList'>{{city.cityName+", "+city.stateName}}</option>
-        </select>
-
-       <br>
-        Pincode: <input type="number" ngModel name="pincode" required><br>
       
         <button
+          class="btn btn-default"
           [disabled]="!formData.valid"
           type="submit">
         Submit</button>
+
       </form>
       
 </div>

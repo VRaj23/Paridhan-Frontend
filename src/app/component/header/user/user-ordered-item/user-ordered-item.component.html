@@ -1,0 +1,15 @@
+<div class="border-style">
+  <div class="row">
+    <div class="col-4">
+        <img src={{imageDownloadAPI+order.imageID}} 
+        class="img-fluid img-rounded">
+    </div>
+
+    <div class="col-8">
+        <p>{{order.productName}}</p>
+        <p>Status: {{order.statusName}}</p>
+        <p>Ordered On: {{getFormatedDateTime(order.creationDateTime)}}</p>
+    </div>
+
+  </div>
+</div>

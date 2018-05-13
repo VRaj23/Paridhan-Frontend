@@ -27,6 +27,7 @@ import { OrderComponent } from './component/body/order/order.component';
 import { RegiserUserComponent } from './component/body/regiser-user/regiser-user.component';
 import { UserComponent } from './component/header/user/user.component';
 import { ColorSizePickerComponent } from './component/body/product-detail/color-size-picker/color-size-picker.component';
+import { UserOrderedItemComponent } from './component/header/user/user-ordered-item/user-ordered-item.component';
 
 
 const appRoutes: Routes = [
@@ -59,7 +60,8 @@ const appRoutes: Routes = [
     OrderComponent,
     RegiserUserComponent,
     UserComponent,
-    ColorSizePickerComponent
+    ColorSizePickerComponent,
+    UserOrderedItemComponent
   ],
   imports: [
     BrowserModule,

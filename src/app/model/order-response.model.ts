@@ -6,7 +6,7 @@ export class OrderResponse{
     brandName: string;
     imageID: number;
     typeName: string;
-    status: string;
+    statusName: string;
     amount: number;
     quantity: number;
     creationDateTime: string;

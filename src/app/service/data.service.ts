@@ -10,9 +10,13 @@ import { LoginRequest } from '../model/login-request.model';
 import { RegisterRequest } from '../model/register-request.model';
 import { OrderRequest } from '../model/order-request.model';
 import { LoginDetailsService } from './intercom/login-details.service';
+import { OrderResponse } from '../model/order-response.model';
+import { Customer } from '../model/customer.model';
+import { City } from '../model/city.model';
 
 @Injectable()
 export class DataService {
+  //private backendAPI: string = "https://www.vraj23.com";
   private backendAPI: string = "http://localhost:8080";
   //private backendAPI: string = "https://192.168.1.3:8080";
   //private backendAPI: string = "http://192.168.43.123:8080";
@@ -28,26 +32,9 @@ export class DataService {
   private customerOrdersAPI: string = "/auth/customer/order/getAll";
   private getCitiesAPI: string ="/address/cities";
 
-  constructor(private http: HttpClient, private loginDetailService: LoginDetailsService) { 
-  }
+  constructor(private http: HttpClient, private loginDetailService: LoginDetailsService) {  }
 
-  getProductType(): Observable<JsonResponse>{
-    return this.http.get<JsonResponse>(this.backendAPI + this.productTypeAPI);
-  }
-
-  getCities(): Observable<JsonResponse>{
-    return this.http.get<JsonResponse>(this.backendAPI + this.getCitiesAPI);
-  }
-
-  getProductHeader(typeID: number): Observable<JsonResponse>{
-    return this.http.get<JsonResponse>
-      (this.backendAPI + this.productHeaderAPI + "?t=" + typeID.toString());
-  }
-
-  getProductDetail(headerID: string): Observable<JsonResponse>{
-    return this.http.get<JsonResponse>
-      (this.backendAPI + this.productDetailAPI + "?h=" + headerID);
-  }
+//UTIL
 
   getImageDownloadAPI(): string{
     return this.backendAPI + this.imageDownloadAPI;
@@ -58,29 +45,50 @@ export class DataService {
       .append("Authorization", "Bearer ".concat(this.loginDetailService.getToken()) )};
   }
 
-  getCustomerInfo(): Observable<JsonResponse>{
-    return this.http.get<JsonResponse>(this.backendAPI + this.customerInfoAPI
+//GET
+
+  getProductType(): Observable<JsonResponse<ProductType[]>>{
+    return this.http.get<JsonResponse<ProductType[]>>(this.backendAPI + this.productTypeAPI);
+  }
+
+  getProductHeader(typeID: number): Observable<JsonResponse<ProductHeader[]>>{
+    return this.http.get<JsonResponse<ProductHeader[]>>
+      (this.backendAPI + this.productHeaderAPI + "?t=" + typeID.toString());
+  }
+
+  getProductDetail(headerID: string): Observable<JsonResponse<ProductDetail[]>>{
+    return this.http.get<JsonResponse<ProductDetail[]>>
+      (this.backendAPI + this.productDetailAPI + "?h=" + headerID);
+  }
+
+  getCities(): Observable<JsonResponse<City[]>>{
+    return this.http.get<JsonResponse<City[]>>(this.backendAPI + this.getCitiesAPI);
+  }
+
+  getCustomerInfo(): Observable<JsonResponse<Customer>>{
+    return this.http.get<JsonResponse<Customer>>(this.backendAPI + this.customerInfoAPI
       ,this.getHeaderWithToken() );
   }
 
-  postLogin(request: LoginRequest): Observable<JsonResponse>{
-    return this.http.post<JsonResponse>(this.backendAPI + this.customerLoginAPI,request);
+  getCustomerOrders(): Observable<JsonResponse<OrderResponse[]>>{
+    return this.http.get<JsonResponse<OrderResponse[]>>(this.backendAPI + this.customerOrdersAPI
+      ,this.getHeaderWithToken() );
   }
 
-  postRegister(request: RegisterRequest): Observable<JsonResponse>{
-    return this.http.post<JsonResponse>(this.backendAPI + this.registerUserAPI,request);
+//POST
+
+  postLogin(request: LoginRequest): Observable<JsonResponse<string>>{
+    return this.http.post<JsonResponse<string>>(this.backendAPI + this.customerLoginAPI,request);
   }
 
-  postOrders(request: OrderRequest): Observable<JsonResponse>{
-    return this.http.post<JsonResponse>(this.backendAPI + this.customerAddOrderAPI
+  postRegister(request: RegisterRequest): Observable<JsonResponse<null>>{
+    return this.http.post<JsonResponse<null>>(this.backendAPI + this.registerUserAPI,request);
+  }
+
+  postOrders(request: OrderRequest): Observable<JsonResponse<null>>{
+    return this.http.post<JsonResponse<null>>(this.backendAPI + this.customerAddOrderAPI
       ,request
       ,this.getHeaderWithToken());
   }
-
-  getCustomerOrders(): Observable<JsonResponse>{
-    return this.http.get<JsonResponse>(this.backendAPI + this.customerOrdersAPI
-      ,this.getHeaderWithToken() );
-  }
-
 
 }
