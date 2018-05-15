@@ -9,8 +9,8 @@ import { DataService } from '../../../../service/data.service';
 })
 export class UserOrderedItemComponent implements OnInit {
 
-  @Input() private order: OrderResponse;
-  private imageDownloadAPI: string;
+  @Input() order: OrderResponse;
+  imageDownloadAPI: string;
 
   constructor(private dataService: DataService) {
     this.imageDownloadAPI = this.dataService.getImageDownloadAPI();

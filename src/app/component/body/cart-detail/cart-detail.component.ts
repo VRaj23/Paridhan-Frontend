@@ -10,12 +10,20 @@ import { CartItem } from '../../../model/cart-item.model';
 })
 export class CartDetailComponent implements OnInit {
 
-  private itemsInCart: number = 0;
-  private totalAmount: number = 0;
-  private cartItems: CartItem[] = [];
+  itemsInCart: number = 0;
+  totalAmount: number = 0;
+  cartItems: CartItem[] = [];
+  showItemTable:boolean =  false;
 
   constructor(private cartDetailsService: CartDetailsService,private router: Router) { 
-    this.cartDetailsService.currentCartCount.subscribe(count => this.itemsInCart = count);
+    this.cartDetailsService.currentCartCount.subscribe
+    ((count) => {
+      this.itemsInCart = count
+      if(count==0)
+        this.showItemTable = false;
+      else
+        this.showItemTable = true;
+    });
   }
 
   ngOnInit() {

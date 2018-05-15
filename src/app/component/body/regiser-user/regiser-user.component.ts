@@ -14,7 +14,7 @@ import { AddressCreationRequest } from '../../../model/address-creation-request.
 })
 export class RegiserUserComponent implements OnInit {
 
-  private cityList: City[];
+  cityList: City[];
 
   constructor(private dataService: DataService
     ,private router: Router) { }

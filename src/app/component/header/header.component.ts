@@ -10,8 +10,8 @@ import { LoginDetailsService } from '../../service/intercom/login-details.servic
 })
 export class HeaderComponent implements OnInit {
 
-  private cutomer: Customer;
-  private customerName: string = "Login";
+  cutomer: Customer;
+  customerName: string = "Login";
 
   constructor(private dataService: DataService
     ,private loginDetailsService: LoginDetailsService) { }

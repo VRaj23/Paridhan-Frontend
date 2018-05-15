@@ -12,7 +12,7 @@ import { SelectedProductTypeService } from '../../../../service/intercom/selecte
 export class ProductTypeRecordComponent implements OnInit {
 
   @Input() productType: ProductType;
-  private imageDownloadAPI: string;
+  imageDownloadAPI: string;
 
   constructor(private _dataService: DataService
     ,private router: Router

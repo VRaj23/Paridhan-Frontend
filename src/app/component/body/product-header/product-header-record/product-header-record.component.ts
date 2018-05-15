@@ -12,7 +12,7 @@ import { SelectedProductHeaderService } from '../../../../service/intercom/selec
 export class ProductHeaderRecordComponent implements OnInit {
  
   @Input() productHeader: ProductHeader;
-  private imageDownloadAPI: string;
+  imageDownloadAPI: string;
 
   constructor(private _route: ActivatedRoute
     ,private dataService: DataService

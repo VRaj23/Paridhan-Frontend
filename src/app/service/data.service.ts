@@ -16,21 +16,19 @@ import { City } from '../model/city.model';
 
 @Injectable()
 export class DataService {
-  //private backendAPI: string = "https://www.vraj23.com";
-  private backendAPI: string = "http://localhost:8080";
-  //private backendAPI: string = "https://192.168.1.3:8080";
-  //private backendAPI: string = "http://192.168.43.123:8080";
-  //private backendAPI: string = "http://192.168.56.102:8080";
-  private productHeaderAPI: string = "/product/header";
-  private productTypeAPI: string = "/product/type";
-  private imageDownloadAPI: string = "/product/downloadImage/";
-  private productDetailAPI: string = "/product/line";
-  private customerLoginAPI: string = "/customer/login";
-  private registerUserAPI: string = "/customer/registerUser";
-  private customerInfoAPI: string = "/auth/customer/info";
-  private customerAddOrderAPI: string = "/auth/customer/order/addOrder";
-  private customerOrdersAPI: string = "/auth/customer/order/getAll";
-  private getCitiesAPI: string ="/address/cities";
+  backendAPI: string = "https://www.vraj23.com";
+  //backendAPI: string = "http://localhost:8080";
+  
+  productHeaderAPI: string = "/product/header";
+  productTypeAPI: string = "/product/type";
+  imageDownloadAPI: string = "/product/downloadImage/";
+  productDetailAPI: string = "/product/line";
+  customerLoginAPI: string = "/customer/login";
+  registerUserAPI: string = "/customer/registerUser";
+  customerInfoAPI: string = "/auth/customer/info";
+  customerAddOrderAPI: string = "/auth/customer/order/addOrder";
+  customerOrdersAPI: string = "/auth/customer/order/getAll";
+  getCitiesAPI: string ="/address/cities";
 
   constructor(private http: HttpClient, private loginDetailService: LoginDetailsService) {  }
 

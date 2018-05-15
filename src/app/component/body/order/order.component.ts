@@ -15,12 +15,12 @@ import { CartItem } from '../../../model/cart-item.model';
 })
 export class OrderComponent implements OnInit {
 
-  private cartItems: CartItem[] = [];
-  private orders: OrderRequest[] = [];
-  private deliveryAddress: Address = new  Address();
-  private customerName: string;
-  private customerContact: string;
-  private placeOrderDisabled: boolean = false;
+  cartItems: CartItem[] = [];
+  orders: OrderRequest[] = [];
+  deliveryAddress: Address = new  Address();
+  customerName: string;
+  customerContact: string;
+  placeOrderDisabled: boolean = false;
 
   constructor(private loginDetailService: LoginDetailsService,
     private cartDetailService: CartDetailsService,

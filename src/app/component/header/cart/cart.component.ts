@@ -8,7 +8,7 @@ import { CartDetailsService } from '../../../service/intercom/cart-details.servi
 })
 export class CartComponent implements OnInit {
 
-  private itemsInCart: number = 0;
+  itemsInCart: number = 0;
 
   constructor(private cartService: CartDetailsService) { }
 

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, Router, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { DataService } from './service/data.service';
 import { LoginDetailsService } from './service/intercom/login-details.service';
@@ -28,6 +29,7 @@ import { RegiserUserComponent } from './component/body/regiser-user/regiser-user
 import { UserComponent } from './component/header/user/user.component';
 import { ColorSizePickerComponent } from './component/body/product-detail/color-size-picker/color-size-picker.component';
 import { UserOrderedItemComponent } from './component/header/user/user-ordered-item/user-ordered-item.component';
+import { environment } from '../environments/environment.prod';
 
 
 const appRoutes: Routes = [
@@ -67,7 +69,8 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes,{initialNavigation: false})
+    RouterModule.forRoot(appRoutes,{initialNavigation: false}),
+    environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : []
   ],
   providers: [
     DataService,

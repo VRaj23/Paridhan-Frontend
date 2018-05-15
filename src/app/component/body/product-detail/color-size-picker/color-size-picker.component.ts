@@ -9,9 +9,9 @@ import { ProductDetail } from '../../../../model/product-detail.model';
 export class ColorSizePickerComponent implements OnInit {
 
   @Input() productDetailList: ProductDetail[] =  [];
-  private colorSet: ValueStateSet[] = [];
-  private sizeSet: ValueStateSet[] = [];
-  private dictionay: Dictionary[] = [];
+  colorSet: ValueStateSet[] = [];
+  sizeSet: ValueStateSet[] = [];
+  dictionay: Dictionary[] = [];
 
   colorButtonSelectedValue: string;
   sizeButtonSelectedValue: string;

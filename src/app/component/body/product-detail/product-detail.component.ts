@@ -20,15 +20,15 @@ import { CartItem } from '../../../model/cart-item.model';
 })
 export class ProductDetailComponent implements OnInit {
 
-  private productDetails: ProductDetail[];
-  private selectedProductHeader: ProductHeader;
-  private selectedType: ProductType;
-  private imageDownload: string;
-  private cartCountSubscription: Subscription;
-  private itemsInCart: number = 0;
-  private quantity = 1;
-  private selectedProductLine: number = 0;
-  private disableAddToCartButton: boolean = true;
+  productDetails: ProductDetail[];
+  selectedProductHeader: ProductHeader;
+  selectedType: ProductType;
+  imageDownload: string;
+  cartCountSubscription: Subscription;
+  itemsInCart: number = 0;
+  quantity = 1;
+  selectedProductLine: number = 0;
+  disableAddToCartButton: boolean = true;
   
   @ViewChild("formData") formData: NgForm;
 
@@ -81,7 +81,7 @@ export class ProductDetailComponent implements OnInit {
       this.quantity--;
   }
 
-  private addToCart(){
+  addToCart(){
 
     var price = this.selectedProductHeader.price;
     var discount = this.selectedProductHeader.discount;

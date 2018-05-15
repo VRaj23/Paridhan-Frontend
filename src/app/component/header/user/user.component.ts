@@ -12,10 +12,10 @@ import { Customer } from '../../../model/customer.model';
 })
 export class UserComponent implements OnInit {
 
-  private orderCount: number = 0;
-  private orderedList: OrderResponse[] = [];
-  private customer: Customer = new Customer();
-  private loginStatus: boolean = false;
+  orderCount: number = 0;
+  orderedList: OrderResponse[] = [];
+  customer: Customer = new Customer();
+  loginStatus: boolean = false;
 
   constructor(private loginService: LoginDetailsService
     ,private router: Router

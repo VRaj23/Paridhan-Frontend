@@ -13,8 +13,8 @@ import { SelectedProductTypeService } from '../../../service/intercom/selected-p
 })
 export class ProductHeaderComponent implements OnInit {
 
-  private selectedType: ProductType;
-  private headerList: Array<ProductHeader>;
+  selectedType: ProductType;
+  headerList: Array<ProductHeader>;
 
   constructor(private _route: ActivatedRoute
     ,private dateService: DataService
