@@ -69,8 +69,8 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes,{initialNavigation: false}),
-    environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : []
+    RouterModule.forRoot(appRoutes,{initialNavigation: false})
+    //,environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : []
   ],
   providers: [
     DataService,

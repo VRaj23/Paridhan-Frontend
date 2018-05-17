@@ -1,26 +1,17 @@
-<div class="container">
-  <div class="row">
-
-    <div class="col-6" role="presentation">
-      <a [routerLink]="['']">
-        <h2>परिधान</h2>
-      </a>
-    </div>
-
-
-    <div class="col-2 col-lg-2 float-right" role="presentation">
-      <a [routerLink]="['/user']">
-        {{customerName}}
-      </a>
-    </div>
-      
-
-
-    <div class="col-4 col-lg-2 float-right" role="presentation">
-      <a [routerLink]="['/cart']">
-        <app-cart></app-cart>
-      </a>
-    </div>
-  
-  </div>
-</div>
+<nav class="navbar navbar-dark bg-primary">
+    <a class="navbar-brand" [routerLink]="['']">
+      <h2>परिधान</h2>
+    </a>
+    <ul class="navbar-nav flex-direction-override">
+      <li class="navbar-item">
+        <a class="nav-link" role="presentation" [routerLink]="['/user']">
+          {{customerName}}
+        </a>
+      </li>
+      <li class="navbar-item m-left">
+          <a class="nav-link" role="presentation" [routerLink]="['/cart']">
+            <app-cart></app-cart>
+          </a>
+      </li>
+    </ul>
+  </nav>

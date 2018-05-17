@@ -1,6 +1,14 @@
-    <div>
-      <a [routerLink]="['/product']">Back to {{selectedType.description}}</a>
-    </div>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a [routerLink]="['']">Home</a>
+        </li>
+        
+        <li class="breadcrumb-item">
+          <a [routerLink]="['/product']">Back to {{selectedType.description}}</a>
+        </li>
+      </ol>
+    </nav>
 
     <div style="text-align:center">
       <img src={{imageDownload}} class="img-fluid img-rounded"> 

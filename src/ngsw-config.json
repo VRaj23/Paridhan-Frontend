@@ -20,7 +20,7 @@
       "updateMode": "prefetch",
       "resources": {
         "files": ["/assets/**"],
-        "urls": ["https://www.vraj23.com/**"]
+        "urls": ["/product/**","https://fonts.googleapis.com/**"]
       }
     }]
   }

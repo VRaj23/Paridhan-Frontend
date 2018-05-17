@@ -12,6 +12,6 @@ export const popOut = trigger('popOut',
     ]);
 
 export enum popOutState {
-    INITIAL = "initial",
-    FINAL = "final"
+    NORMAL = "normal",
+    POPPED = "popped"
 }
