@@ -4,6 +4,7 @@ import { Routes, Router, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DataService } from './service/data.service';
 import { LoginDetailsService } from './service/intercom/login-details.service';
@@ -67,10 +68,11 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(appRoutes,{initialNavigation: false})
-    //,environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : []
+    ,environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : []
   ],
   providers: [
     DataService,
