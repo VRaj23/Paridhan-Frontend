@@ -12,8 +12,8 @@
     border-color: yellow;
     border-width: 5px;
 
-    height:47px;
-    width:47px;
+    height:50px;
+    width:50px;
 
     margin-left: 10px;
     margin-right: 10px;
@@ -34,9 +34,14 @@
 .disabled {
     border-style: none;
 
-    height:35px;
-    width:35px;
+    height:40px;
+    width:40px;
 
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.round-button{
+    border-radius: 50%;
+    outline:none;
 }

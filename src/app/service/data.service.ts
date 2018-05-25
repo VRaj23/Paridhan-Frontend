@@ -17,8 +17,8 @@ import { City } from '../model/city.model';
 @Injectable()
 export class DataService {
   backendAPI: string = "https://www.vraj23.com";
-  //backendAPI: string = "https://localhost:8080";
-  
+  //backendAPI: string = "https://localhost:8443";
+  //backendAPI: string = "http://localhost:8080";
   productHeaderAPI: string = "/product/header";
   productTypeAPI: string = "/product/type";
   imageDownloadAPI: string = "/product/downloadImage/";

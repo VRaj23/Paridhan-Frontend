@@ -3,3 +3,8 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
+
+.clear-cart-margin {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

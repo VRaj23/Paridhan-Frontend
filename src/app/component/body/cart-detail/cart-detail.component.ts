@@ -46,4 +46,8 @@ export class CartDetailComponent implements OnInit {
     }
   }
 
+  clearCart(){
+    this.cartDetailsService.resetCart();
+  }
+
 }

@@ -2,6 +2,10 @@
     flex-direction: row !important;
 }
 
+.nav-padding-override{
+    padding: .2rem 1rem !important;
+}
+
 .m-left{
     margin-left:30px;
 }

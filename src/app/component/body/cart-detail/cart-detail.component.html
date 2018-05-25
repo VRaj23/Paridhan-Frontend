@@ -36,11 +36,16 @@
 
 </div>
 
+<button
+  class="btn btn-warning clear-cart-margin"
+  (click)=clearCart()
+>Clear Cart</button>
+
 <div>
   <footer>
     <button 
       (click)="initiateOrder()" 
-      class="btn btn-block"
+      class="btn btn-block btn-success"
       [disabled] = "!showItemTable"
     >Order</button>
   </footer>

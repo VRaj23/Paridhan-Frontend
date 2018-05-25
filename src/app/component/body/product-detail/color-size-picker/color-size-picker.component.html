@@ -18,6 +18,7 @@
   <div class="row">
     <div *ngFor = 'let size of sizeSet'>
       <button
+        class = "round-button"
         [ngClass]="{enabled: size.state == 'enabled' 
           , selected: size.state == 'selected' 
           , disabled: size.state == 'disabled'}"

@@ -19,12 +19,11 @@ export const popOut = trigger('popOut', [
       transform: 'scale(1)'
     })),
     transition('initial <=> final', [
-      animate(300, style({transform: 'scale(2)'})),
-      animate(100, style({transform: 'scale(1.2)'})),
-      animate(300, style({transform: 'scale(1.75)'})),
-      animate(100, style({transform: 'scale(1.2)'})),
-      animate(300, style({transform: 'scale(1.25)'})),
-      animate(100, style({transform: 'scale(1.2)'}))
+      animate(400, style({transform: 'scale(2.5)'})),
+      animate(200, style({transform: 'scale(1.25)'})),
+      animate(400, style({transform: 'scale(2)'})),
+      animate(200, style({transform: 'scale(1.25)'})),
+      animate(400, style({transform: 'scale(1.5)'}))
     ])
   ]
 );

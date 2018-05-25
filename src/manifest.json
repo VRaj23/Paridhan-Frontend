@@ -1,0 +1,45 @@
+{
+    "short_name":"Paridhan",
+    "name":"Paridhan App",
+    "start_url":"/",
+    "theme_color":"#007bff",
+    "background_color":"#ffffff",
+    "display":"standalone",
+    "orientation":"portrait",
+    "icons":[
+      {
+        "src":"favicon.ico",
+        "type":"image/png"
+      },
+      {
+        "src":"favicon.ico",
+        "sizes":"16x16",
+        "type":"image/png"
+      },
+      {
+        "src":"favicon.ico",
+        "sizes":"32x32",
+        "type":"image/png"
+      },
+      {
+        "src":"favicon.ico",
+        "sizes":"150x150",
+        "type":"image/png"
+      },
+      {
+        "src":"favicon.ico",
+        "sizes":"384x384",
+        "type":"image/png"
+      },
+      {
+        "src": "favicon.ico",
+        "sizes": "512x512",
+        "type": "image/png"
+      },
+      {
+        "src":"favicon.ico",
+        "sizes":"192x912",
+        "type":"image/png"
+      }
+    ]
+  }
