@@ -1,6 +1,20 @@
-<p>
-  {{itemsInCart}} items in Cart
-</p>
+<div style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px;
+ border-bottom-width: 1px; border-bottom-style: solid; 
+ border-bottom-color: gray;height:45px;">
+  <div style="float:left;line-height:30px;">
+    <p>
+      {{itemsInCart}} items in Cart
+    </p>
+  </div>
+
+   <button 
+   type="button" 
+   class="btn btn-warning"
+   (click)=open(content)
+   [disabled]="!showItemTable"
+   style="float: right;">Clear Cart</button>
+
+</div>
 
 <div *ngIf="showItemTable">
 
@@ -36,12 +50,33 @@
 
 </div>
 
-<button
-  class="btn btn-warning clear-cart-margin"
-  (click)=clearCart()
->Clear Cart</button>
+<ng-template #content let-c="close">
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm</h4>
+  </div>
+  <div class="modal-body">
+    <p>Delete all items from shopping cart ?</p>
+  </div>
+  <div class="modal-footer" style="padding: 2rem !important">
+    <button 
+      type="button" class="btn btn-danger" 
+      style="position: absolute; left: 5px;" 
+      (click)="c('yes')">
+      Yes, Clear Cart
+    </button>
+    
+    <button 
+      type="button" class="btn btn-success" 
+      style="position: absolute; right: 5px;" 
+      (click)="c('no')">
+      No
+    </button>
+  </div>
+</ng-template>
 
-<div>
+
+
+<div style="margin-top: 20px">
   <footer>
     <button 
       (click)="initiateOrder()" 

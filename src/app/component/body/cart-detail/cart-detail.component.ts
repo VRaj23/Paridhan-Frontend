@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { CartDetailsService } from '../../../service/intercom/cart-details.service';
 import { CartItem } from '../../../model/cart-item.model';
 
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-cart-detail',
   templateUrl: './cart-detail.component.html',
@@ -15,7 +17,11 @@ export class CartDetailComponent implements OnInit {
   cartItems: CartItem[] = [];
   showItemTable:boolean =  false;
 
-  constructor(private cartDetailsService: CartDetailsService,private router: Router) { 
+  constructor(
+     private cartDetailsService: CartDetailsService
+    ,private router: Router
+    ,private ngModal: NgbModal) 
+    { 
     this.cartDetailsService.currentCartCount.subscribe
     ((count) => {
       this.itemsInCart = count
@@ -48,6 +54,16 @@ export class CartDetailComponent implements OnInit {
 
   clearCart(){
     this.cartDetailsService.resetCart();
+  }
+
+  open(content) {
+    this.ngModal.open(content, { size: 'sm',centered: true }).result.then((result) => {
+        if (result == 'yes'){
+          this.clearCart();
+        }
+      }, (rejected) => {
+        console.log('dismissed');
+    });
   }
 
 }
