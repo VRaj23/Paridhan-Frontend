@@ -8,13 +8,25 @@
   </div>
 
    <button 
-   type="button" 
-   class="btn btn-warning"
-   (click)=open(content)
-   [disabled]="!showItemTable"
-   style="float: right;">Clear Cart</button>
+    type="button" 
+    class="btn btn-warning"
+    [disabled]="!showItemTable"
+    style="float: right;"
+    data-toggle="modal"
+    data-target="#clearCartConfirmDialog">
+    Clear Cart
+  </button>
 
 </div>
+
+<app-confirmation-dialog
+[dialogName]="dialogName"
+[title]="dialogTitle"
+[message]="dialogMessage"
+[redButton]="dialogRedButton"
+[greenButton]="dialogGreenButton"
+(dialogButtonClick)="onClearCartConfirmDialogButtonClick($event)">
+</app-confirmation-dialog>
 
 <div *ngIf="showItemTable">
 
@@ -49,30 +61,6 @@
   </p>
 
 </div>
-
-<ng-template #content let-c="close">
-  <div class="modal-header">
-    <h4 class="modal-title">Confirm</h4>
-  </div>
-  <div class="modal-body">
-    <p>Delete all items from shopping cart ?</p>
-  </div>
-  <div class="modal-footer" style="padding: 2rem !important">
-    <button 
-      type="button" class="btn btn-danger" 
-      style="position: absolute; left: 5px;" 
-      (click)="c('yes')">
-      Yes, Clear Cart
-    </button>
-    
-    <button 
-      type="button" class="btn btn-success" 
-      style="position: absolute; right: 5px;" 
-      (click)="c('no')">
-      No
-    </button>
-  </div>
-</ng-template>
 
 
 

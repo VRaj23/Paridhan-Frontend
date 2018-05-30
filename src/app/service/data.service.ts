@@ -26,8 +26,8 @@ export class DataService {
   customerLoginAPI: string = "/customer/login";
   registerUserAPI: string = "/customer/registerUser";
   customerInfoAPI: string = "/auth/customer/info";
-  customerAddOrderAPI: string = "/auth/customer/order/addOrder";
-  customerOrdersAPI: string = "/auth/customer/order/getAll";
+  customerAddOrderAPI: string = "/auth/customer/order/add";
+  customerOrdersAPI: string = "/auth/customer/order/all";
   getCitiesAPI: string ="/address/cities";
 
   constructor(private http: HttpClient, private loginDetailService: LoginDetailsService) {  }

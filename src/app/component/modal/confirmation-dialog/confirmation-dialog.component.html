@@ -1,0 +1,63 @@
+<!-- 
+
+  *Add this to parent
+
+  <app-confirmation-dialog
+    [dialogName]="dialogName"
+    [title]="dialogTitle"
+    [message]="dialogMessage"
+    [redButton]="dialogRedButton"
+    [greenButton]="dialogGreenButton"
+    (dialogButtonClick)="onDialogButtonClick($event)">
+  </app-confirmation-dialog>
+
+  *To trigger
+
+    <button
+      data-toggle="modal"
+      data-target="#dialogName">
+      button
+   </button>
+
+   value of dailogName variable & data-target should be same
+
+  * Implement onDialogButtonClick($event) in parent
+
+-->
+
+<div class="modal fade" [id]=dialogName tabindex="-1" role="dialog" 
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+  
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">{{title}}</h4>
+      </div>
+  
+      <div class="modal-body">
+        <h6>{{message}}</h6>
+      </div>
+  
+      <div class="modal-footer" style="padding: 2rem !important">
+        <button 
+          type="button" class="btn btn-danger" 
+          style="position: absolute; left: 5px;"
+          (click)="redClick()" 
+          data-dismiss="modal">
+          {{redButton}}
+        </button>
+        
+        <button 
+          type="button" class="btn btn-success" 
+          style="position: absolute; right: 5px;"
+          (click)="greenClick()"
+          data-dismiss="modal">
+          {{greenButton}}
+        </button>
+      </div>
+  
+    </div>
+  </div>
+
+</div>

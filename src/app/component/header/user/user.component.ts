@@ -4,6 +4,7 @@ import { DataService } from '../../../service/data.service';
 import { LoginDetailsService } from '../../../service/intercom/login-details.service';
 import { OrderResponse } from '../../../model/order-response.model';
 import { Customer } from '../../../model/customer.model';
+import { ConfirmationDialogComponent } from '../../modal/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-user',
@@ -17,16 +18,23 @@ export class UserComponent implements OnInit {
   customer: Customer = new Customer();
   loginStatus: boolean = false;
 
+  dialogName = "logoutConfirm"
+  dialogTitle = "Confirm"
+  dialogMessage = "Logout ?"
+  dialogRedButton = "Yes, Logout"
+  dialogGreenButton = "No"
+
   constructor(private loginService: LoginDetailsService
     ,private router: Router
-    ,private dataService: DataService) { }
+    ,private dataService: DataService
+    ) { }
 
   ngOnInit() {
 
     this.loginService.getLoginStatus().subscribe(
       (status) => {
         if(!status){
-          this.router.navigate(['login/user']);
+          this.redirectToLogin();
         }else{
           this.getCustomerOrders();
           this.getCustomerInfo();
@@ -36,9 +44,16 @@ export class UserComponent implements OnInit {
     
   }
 
+  private redirectToLogin(){
+    this.router.navigate(['login/user']);
+  }
+
   private getCustomerOrders(){
     this.dataService.getCustomerOrders().subscribe(
       (json) => {
+        if(json.status != 200)
+          this.redirectToLogin();
+
         if(Array.isArray(json.response)){
           this.orderCount = json.response.length;
           this.orderedList = json.response;
@@ -50,8 +65,12 @@ export class UserComponent implements OnInit {
   private getCustomerInfo(){
     this.dataService.getCustomerInfo().subscribe(
       (json) => {
-        this.customer = json.response;
-        this.loginStatus = true;
+        if(json.status == 200){
+          this.customer = json.response;
+          this.loginStatus = true;
+        }else{
+          this.redirectToLogin();
+        }
       }
     );
   }
@@ -59,6 +78,12 @@ export class UserComponent implements OnInit {
   logout(){
     this.loginService.onLogOut();
     this.router.navigate(['']);
+  }
+
+  onLogoutDialogButtonClick($event){
+    if ($event == this.dialogRedButton){
+      this.logout();
+    }
   }
 
 }

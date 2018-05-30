@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { CartDetailsService } from '../../../service/intercom/cart-details.service';
 import { CartItem } from '../../../model/cart-item.model';
 
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-
 @Component({
   selector: 'app-cart-detail',
   templateUrl: './cart-detail.component.html',
@@ -17,10 +15,16 @@ export class CartDetailComponent implements OnInit {
   cartItems: CartItem[] = [];
   showItemTable:boolean =  false;
 
+  dialogName = "clearCartConfirmDialog";
+  dialogTitle = "Confirm"
+  dialogMessage = "Clear all items from shopping cart ?"
+  dialogRedButton = "Yes, clear cart"
+  dialogGreenButton = "No !"
+
+
   constructor(
      private cartDetailsService: CartDetailsService
-    ,private router: Router
-    ,private ngModal: NgbModal) 
+    ,private router: Router) 
     { 
     this.cartDetailsService.currentCartCount.subscribe
     ((count) => {
@@ -56,14 +60,9 @@ export class CartDetailComponent implements OnInit {
     this.cartDetailsService.resetCart();
   }
 
-  open(content) {
-    this.ngModal.open(content, { size: 'sm',centered: true }).result.then((result) => {
-        if (result == 'yes'){
-          this.clearCart();
-        }
-      }, (rejected) => {
-        console.log('dismissed');
-    });
+  onClearCartConfirmDialogButtonClick($event){
+    if ($event ==  this.dialogRedButton)
+      this.clearCart();
   }
 
 }

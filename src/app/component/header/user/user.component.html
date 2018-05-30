@@ -1,17 +1,60 @@
 <div *ngIf="loginStatus; else loading">
 
-  <h3>Welcome {{customer.name}}</h3>
-  
-  <div>
-    <button (click)=logout()>Logout</button>
-  </div>
+    <div style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px;
+    border-bottom-width: 1px; border-bottom-style: solid; 
+    border-bottom-color: gray;height:45px;">
+     
+     <div style="float:left;line-height:30px;">
+      <h3>Welcome {{customer.name}}</h3>
+     </div>
+   
+     <div>
+        <button
+          type="button"
+          style="float: right;"
+          class="btn btn-warning btn-sm" 
+          data-toggle="modal"
+          data-target="#logoutConfirm">
+          Logout
+       </button>
+      </div>
+   
+   </div>
+
+  <app-confirmation-dialog
+    [dialogName]="dialogName"
+    [title]="dialogTitle"
+    [message]="dialogMessage"
+    [redButton]="dialogRedButton"
+    [greenButton]="dialogGreenButton"
+    (dialogButtonClick)="onLogoutDialogButtonClick($event)">
+  </app-confirmation-dialog>
   
   <br>
   
   <div>
+      <div style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px;
+      border-bottom-width: 1px; border-bottom-style: solid; 
+      border-bottom-color: gray;height:45px;">
+       
+       <div style="float:left;line-height:30px;">
+          <h4>Saved Address</h4>
+       </div>
+     
+       <div>
+          <button 
+            type="button" 
+            class="btn btn-sm" 
+            style="float: right;" 
+            [disabled]="true">
+            Edit
+          </button>
+        </div>
+     
+     </div>
     <div class="row">
-      <h4 class="col-6">Saved Address</h4>
-      <button class="col-2 btn btn-xs" [disabled]="true">Edit</button>
+      
+      
     </div>
     <p>{{customer.addressResponse.houseNumber}}, {{customer.addressResponse.area}}</p>
     <p>{{customer.addressResponse.landmark}}</p>

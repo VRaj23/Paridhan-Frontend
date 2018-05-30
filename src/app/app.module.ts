@@ -33,6 +33,7 @@ import { UserComponent } from './component/header/user/user.component';
 import { ColorSizePickerComponent } from './component/body/product-detail/color-size-picker/color-size-picker.component';
 import { UserOrderedItemComponent } from './component/header/user/user-ordered-item/user-ordered-item.component';
 import { environment } from '../environments/environment.prod';
+import { ConfirmationDialogComponent } from './component/modal/confirmation-dialog/confirmation-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -66,7 +67,8 @@ const appRoutes: Routes = [
     RegiserUserComponent,
     UserComponent,
     ColorSizePickerComponent,
-    UserOrderedItemComponent
+    UserOrderedItemComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
