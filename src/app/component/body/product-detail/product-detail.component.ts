@@ -2,10 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductDetail } from '../../../model/product-detail.model';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../../service/data.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable ,  Subscription } from 'rxjs';
 import { ProductHeader } from '../../../model/product-header.model';
 import { ProductType } from '../../../model/product-type.model';
-import { Subscription } from 'rxjs/Subscription';
 import { NgForm } from '@angular/forms';
 import { OrderRequest } from '../../../model/order-request.model';
 import { SelectedProductTypeService } from '../../../service/intercom/selected-product-type.service';
@@ -24,7 +23,6 @@ export class ProductDetailComponent implements OnInit {
   selectedProductHeader: ProductHeader;
   selectedType: ProductType;
   imageDownload: string;
-  cartCountSubscription: Subscription;
   itemsInCart: number = 0;
   quantity = 1;
   selectedProductLine: number = 0;
@@ -45,7 +43,7 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit() {
 
-    this.cartCountSubscription = this.cartService.currentCartCount
+    this.cartService.currentCartCount
       .subscribe(count => this.itemsInCart = count);
 
     this.dataService.getProductDetail(this.selectedProductHeader.headerID.toString())
@@ -90,10 +88,6 @@ export class ProductDetailComponent implements OnInit {
     var item: CartItem = new CartItem(this.getProductDetail(),this.quantity,price);
 
     this.cartService.addCartItem(item);
-  }
-
-  ngOnDestory(){
-    this.cartCountSubscription.unsubscribe();
   }
 
 }

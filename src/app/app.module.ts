@@ -6,8 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
 import { DataService } from './service/data.service';
 import { LoginDetailsService } from './service/intercom/login-details.service';
 import { CartDetailsService } from './service/intercom/cart-details.service';
@@ -76,7 +74,6 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(appRoutes,{initialNavigation: false})
-    ,NgbModule.forRoot()
     ,environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : []
   ],
   providers: [
