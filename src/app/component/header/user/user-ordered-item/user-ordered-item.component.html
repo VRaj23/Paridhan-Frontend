@@ -1,15 +1,17 @@
-<div class="border-style">
+<div class="border-style" role="presentation">
+  <a (click)="loadUserOrderDetail()">
   <div class="row">
     <div class="col-4">
-        <img src={{imageDownloadAPI+order.imageID}} 
+        <img src={{imageDownloadAPI+imageID}} 
         class="img-fluid img-rounded">
     </div>
 
     <div class="col-8">
-        <p>{{order.productName}}</p>
-        <p>Status: {{order.statusName}}</p>
-        <p>Ordered On: {{getFormatedDateTime(order.creationDateTime)}}</p>
+        <p>{{productName}}</p>
+        <p>Status: {{status}}</p>
+        <p>Ordered On: {{getFormatedDateTime(creationDateTime)}}</p>
     </div>
 
   </div>
+  </a>
 </div>

@@ -1,3 +1,4 @@
+<div *ngIf="!isOrderPlaced; else showOrderPlaced">
 
 <div>
   <h4>Delivery Address:</h4>
@@ -32,9 +33,22 @@
     </div>
   </div>
 
+
+
 <button 
-  class="btn btn-large"
+  class="btn btn-primary btn-large"
   [disabled] = "placeOrderDisabled"
   (click)="placeOrder()"
 >Place Order</button>
+</div>
+
+<ng-template #showOrderPlaced>
+  <div class="text-center">
+    <p>Order Placed Successfully</p>
+    <button
+      class="btn btn-success"
+      (click)= orderPlacedOK()
+    >Ok</button>
+  </div>
+</ng-template>
 

@@ -7,6 +7,7 @@ import { CartDetailsService } from '../../../service/intercom/cart-details.servi
 import { Address } from '../../../model/address.model';
 import { Customer } from '../../../model/customer.model';
 import { CartItem } from '../../../model/cart-item.model';
+import { Apollo } from 'apollo-angular';
 
 @Component({
   selector: 'app-order',
@@ -21,10 +22,14 @@ export class OrderComponent implements OnInit {
   customerName: string;
   customerContact: string;
   placeOrderDisabled: boolean = false;
+  isOrderPlaced: boolean = false;
+
 
   constructor(private loginDetailService: LoginDetailsService,
     private cartDetailService: CartDetailsService,
-    private dataService: DataService, private router: Router) { }
+    private dataService: DataService, 
+    private router: Router,
+    private apollo: Apollo) { }
 
   ngOnInit() {
     this.loginDetailService.getLoginStatus().subscribe(
@@ -53,9 +58,12 @@ export class OrderComponent implements OnInit {
         (json) => {
           if(json.status == 201){
             console.log('Order Placed '+json.message);
+            this.isOrderPlaced = true;
+            this.apollo.getClient().resetStore();
             this.orders=[]
             this.placeOrderDisabled = false;
             this.cartDetailService.resetCart();
+            //TODO show dialog and redirect to user page
           }else{
             console.log('Unable to place Order');
           }
@@ -73,6 +81,10 @@ export class OrderComponent implements OnInit {
         ,item.price * item.quantity
       ));
     }
+  }
+
+  orderPlacedOK(){
+    this.router.navigate(['/user']);
   }
 
 }

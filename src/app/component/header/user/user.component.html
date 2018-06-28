@@ -63,12 +63,24 @@
   </div>
   
   <br>
+
+  <div *ngFor="let order of orders | async">
+    <app-user-ordered-item 
+      [orderID]= "order.orderID"
+      [productName] = "order.productName"
+      [imageID]="order.imageID"
+      [creationDateTime]="order.creationDateTime"
+      [status]="order.status"
+      >
+    </app-user-ordered-item>
+  </div>
   
+  <!--
   <h4> You have placed {{orderCount}} orders</h4>
   <div *ngFor = 'let order of orderedList'>
     <app-user-ordered-item [order] = order></app-user-ordered-item>
   </div>
-
+-->
 </div>
 
 <ng-template #loading>

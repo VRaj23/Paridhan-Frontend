@@ -6,6 +6,14 @@ import { OrderResponse } from '../../../model/order-response.model';
 import { Customer } from '../../../model/customer.model';
 import { ConfirmationDialogComponent } from '../../modal/confirmation-dialog/confirmation-dialog.component';
 
+import { Apollo } from 'apollo-angular';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import gql from 'graphql-tag';
+import { OrderGQL, QueryGQL } from '../../../model/order.graphql';
+import { JsonResponse } from '../../../model/json-response.model';
+
+
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -18,6 +26,8 @@ export class UserComponent implements OnInit {
   customer: Customer = new Customer();
   loginStatus: boolean = false;
 
+  orders: Observable<OrderGQL[]>;
+
   dialogName = "logoutConfirm"
   dialogTitle = "Confirm"
   dialogMessage = "Logout ?"
@@ -27,6 +37,7 @@ export class UserComponent implements OnInit {
   constructor(private loginService: LoginDetailsService
     ,private router: Router
     ,private dataService: DataService
+    ,private apollo: Apollo
     ) { }
 
   ngOnInit() {
@@ -41,7 +52,6 @@ export class UserComponent implements OnInit {
         }
       }
     );
-    
   }
 
   private redirectToLogin(){
@@ -49,16 +59,22 @@ export class UserComponent implements OnInit {
   }
 
   private getCustomerOrders(){
-    this.dataService.getCustomerOrders().subscribe(
-      (json) => {
-        if(json.status != 200)
-          this.redirectToLogin();
-
-        if(Array.isArray(json.response)){
-          this.orderCount = json.response.length;
-          this.orderedList = json.response;
+    this.orders = this.apollo.watchQuery<QueryGQL>({
+      query: gql`
+        {
+          allOrders {
+            orderID
+            imageID
+            productName
+            status
+            creationDateTime
+          }
         }
-      }
+      `
+    })
+    .valueChanges
+    .pipe(
+      map(result => result.data.allOrders)
     );
   }
 

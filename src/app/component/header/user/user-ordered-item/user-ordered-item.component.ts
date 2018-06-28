@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OrderResponse } from '../../../../model/order-response.model';
 import { DataService } from '../../../../service/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-ordered-item',
@@ -9,10 +10,16 @@ import { DataService } from '../../../../service/data.service';
 })
 export class UserOrderedItemComponent implements OnInit {
 
-  @Input() order: OrderResponse;
+  @Input() orderID: number;
+  @Input() imageID: number;     
+  @Input() productName: string;
+  @Input() status: string;
+  @Input() creationDateTime: string;
   imageDownloadAPI: string;
 
-  constructor(private dataService: DataService) {
+  constructor(
+    private dataService: DataService,
+    private router: Router) {
     this.imageDownloadAPI = this.dataService.getImageDownloadAPI();
    }
 
@@ -20,6 +27,10 @@ export class UserOrderedItemComponent implements OnInit {
 
   getFormatedDateTime(dateTime: string): string{
     return dateTime;
+  }
+
+  loadUserOrderDetail(){
+    this.router.navigate(['order_detail/'+this.orderID]);
   }
 
 }

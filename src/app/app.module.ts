@@ -1,10 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, Router, RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ApolloModule, Apollo } from 'apollo-angular';
+import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
+import { setContext } from 'apollo-link-context';
+import { InMemoryCache} from 'apollo-cache-inmemory';
 
 import { DataService } from './service/data.service';
 import { LoginDetailsService } from './service/intercom/login-details.service';
@@ -32,6 +37,7 @@ import { ColorSizePickerComponent } from './component/body/product-detail/color-
 import { UserOrderedItemComponent } from './component/header/user/user-ordered-item/user-ordered-item.component';
 import { environment } from '../environments/environment.prod';
 import { ConfirmationDialogComponent } from './component/modal/confirmation-dialog/confirmation-dialog.component';
+import { UserOrderDetailComponent } from './component/header/user/user-order-detail/user-order-detail.component';
 
 
 const appRoutes: Routes = [
@@ -44,6 +50,7 @@ const appRoutes: Routes = [
   ,{path: 'login', component: LoginComponent}
   ,{path: 'register', component: RegiserUserComponent}
   ,{path: 'user', component: UserComponent}
+  ,{path: 'order_detail/:id', component: UserOrderDetailComponent}
 ];
 
 @NgModule({
@@ -66,13 +73,16 @@ const appRoutes: Routes = [
     UserComponent,
     ColorSizePickerComponent,
     UserOrderedItemComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    UserOrderDetailComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    ApolloModule,
+    HttpLinkModule,
     RouterModule.forRoot(appRoutes,{initialNavigation: false})
     ,environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : []
   ],
@@ -85,4 +95,28 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule { 
+  constructor(apollo: Apollo, 
+    httpLink: HttpLink,
+    loginService: LoginDetailsService) {
+    
+    const http = httpLink.create({uri: 'https://www.vraj23.com/auth/order/graphql'});
+
+    const auth = setContext((_, { headers }) => {
+      const token = loginService.getToken();
+      if (!token) {
+        return {};
+      } else {
+        return {
+          headers: new HttpHeaders().append('Authorization', `Bearer ${token}`)
+        };
+      }
+    });
+    
+    apollo.create({
+      link: auth.concat(http),
+      cache: new InMemoryCache(),
+    });
+  }
+}
