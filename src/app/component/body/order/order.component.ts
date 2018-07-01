@@ -53,8 +53,7 @@ export class OrderComponent implements OnInit {
     console.log("placing Order");
     this.prepareOrders();
     
-    for(var order of this.orders){
-      this.dataService.postOrders(order).subscribe(
+      this.dataService.postOrders(this.orders).subscribe(
         (json) => {
           if(json.status == 201){
             console.log('Order Placed '+json.message);
@@ -69,7 +68,7 @@ export class OrderComponent implements OnInit {
           }
         }
       );
-    }
+  
   }
 
   prepareOrders(){

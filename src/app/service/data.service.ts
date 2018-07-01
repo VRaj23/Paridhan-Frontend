@@ -83,9 +83,9 @@ export class DataService {
     return this.http.post<JsonResponse<null>>(this.backendAPI + this.registerUserAPI,request);
   }
 
-  postOrders(request: OrderRequest): Observable<JsonResponse<null>>{
+  postOrders(requests: OrderRequest[]): Observable<JsonResponse<null>>{
     return this.http.post<JsonResponse<null>>(this.backendAPI + this.customerAddOrderAPI
-      ,request
+      ,requests
       ,this.getHeaderWithToken());
   }
 
