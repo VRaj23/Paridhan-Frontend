@@ -1,5 +1,7 @@
 <div *ngIf="!isOrderPlaced; else showOrderPlaced">
 
+    <h2 class="text-center" style="font-family: Lobster">Order Summary</h2>
+
 <div>
   <h4>Delivery Address:</h4>
   <p>{{deliveryAddress.houseNumber}}</p> <p> {{deliveryAddress.area}}</p>
@@ -8,7 +10,6 @@
   <p>Pincode: {{deliveryAddress.pincode}}</p>
 </div>
 
-<p>Order Summary</p>
 <div class="container">
     <div class="row">
       <div class="col-12">
@@ -33,14 +34,15 @@
     </div>
   </div>
 
-
-
-<button 
-  class="btn btn-primary btn-large"
-  [disabled] = "placeOrderDisabled"
-  (click)="placeOrder()"
->Place Order</button>
-</div>
+  <div style="margin-top: 20px; text-align: center">
+      <footer>
+        <button 
+          (click)="placeOrder()" 
+          class="btn btn-primary btn-large btn-success"
+        >Place Order</button>
+      </footer>
+  </div>
+  </div>
 
 <ng-template #showOrderPlaced>
   <div class="text-center">
