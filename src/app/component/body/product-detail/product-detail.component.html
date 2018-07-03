@@ -54,10 +54,25 @@
     </div>
 
     <footer class="myfooter" style="margin-top: 20px">
-      <button (click)="addToCart()" [disabled]="disableAddToCartButton" class="btn btn-block btn-primary">
-        Add to Cart
-        <img src="./assets/cart.svg" width="20px" height="20px">
-      </button>
+      <div class="row">
+        <div class="col-6">
+          <button 
+            (click)="addToCart()" 
+            [disabled]="disableAddToCartButton" 
+            class="btn btn-block btn-warning">
+            Add to Cart
+            <img src="./assets/cart.svg" width="20px" height="20px">
+          </button>
+        </div>
+        <div class="col-6">
+          <button 
+            (click)="buyNow()" 
+            [disabled]="disableAddToCartButton" 
+            class="btn btn-block btn-success">
+            Buy Now
+          </button>
+        </div>
+      </div>
     </footer>
   </div>
 </div>

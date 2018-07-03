@@ -18,10 +18,16 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.cartService.currentCartCount.subscribe(
       (count) => {
-        this.itemsInCart = count
-        if(count != 0 )
-          this.state == popOutState.INITIAL ? this.state = popOutState.FINAL : this.state = popOutState.INITIAL;
+        this.itemsInCart = count          
       });
+    
+    this.cartService.triggerCartIconAnimate.subscribe(
+      (count) => this.cartIconAnimate()
+    );
+  }
+
+  cartIconAnimate(){
+    this.state == popOutState.INITIAL ? this.state = popOutState.FINAL : this.state = popOutState.INITIAL;
   }
 
 }

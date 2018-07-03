@@ -1,24 +1,40 @@
-<p>
+<h5>
   Please Login to proceed
-</p>
+</h5>
 
 <form (ngSubmit)="login(formData)" #formData = ngForm>
 
   <div class="form-group">
     <label>Mobile</label>
-    <input type="text" class="form-control" ngModel name="username" required autofocus><br>
+    <input 
+      type="text" 
+      class="form-control" 
+      ngModel name="username" 
+      (change)="resetLoginFailed()" 
+      autofocus><br>
   </div>
-
   
   <div class="form-group">
     <label>Password</label> 
-    <input type="password" class="form-control" ngModel name="password" required><br>
+    <input 
+      type="password" 
+      class="form-control" 
+      ngModel name="password" 
+      (change)="resetLoginFailed()" 
+      required>
   </div>
 
+  <div *ngIf="loginFailed">
+    <p style="color: red">Mobile Number or Password is Wrong</p>
+  </div>
+
+  <div *ngIf="loggingIn">
+    <p>Logging In. Please Wait...</p>
+  </div>
 
   <div class="form-group">
     <button 
-      class="btn btn-default"
+      class="btn btn-large btn-success"
       type="submit"
       [disabled]="!formData.valid">
     Login</button>

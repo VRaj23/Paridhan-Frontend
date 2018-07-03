@@ -3,14 +3,17 @@ import { ProductDetail } from '../../../model/product-detail.model';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../../service/data.service';
 import { Observable ,  Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+
 import { ProductHeader } from '../../../model/product-header.model';
 import { ProductType } from '../../../model/product-type.model';
-import { NgForm } from '@angular/forms';
 import { OrderRequest } from '../../../model/order-request.model';
 import { SelectedProductTypeService } from '../../../service/intercom/selected-product-type.service';
 import { SelectedProductHeaderService } from '../../../service/intercom/selected-product-header.service';
 import { CartDetailsService } from '../../../service/intercom/cart-details.service';
 import { CartItem } from '../../../model/cart-item.model';
+import { CartComponent } from '../../header/cart/cart.component';
 
 @Component({
   selector: 'app-product-detail',
@@ -35,6 +38,7 @@ export class ProductDetailComponent implements OnInit {
     ,private selectedProductTypeService: SelectedProductTypeService
     ,private selectedProductHeaderService: SelectedProductHeaderService
     ,private cartService: CartDetailsService
+    ,private router: Router
   ) {
       this.selectedProductHeader = this.selectedProductHeaderService.getSelectedProductHeader(); 
       this.selectedType = this.selectedProductTypeService.getSelectedType();
@@ -88,6 +92,11 @@ export class ProductDetailComponent implements OnInit {
     var item: CartItem = new CartItem(this.getProductDetail(),this.quantity,price);
 
     this.cartService.addCartItem(item);
+  }
+
+  buyNow(){
+    this.addToCart();
+    this.router.navigate(['cart']);
   }
 
 }

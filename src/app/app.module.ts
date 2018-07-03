@@ -38,6 +38,7 @@ import { UserOrderedItemComponent } from './component/header/user/user-ordered-i
 import { environment } from '../environments/environment.prod';
 import { ConfirmationDialogComponent } from './component/modal/confirmation-dialog/confirmation-dialog.component';
 import { UserOrderDetailComponent } from './component/header/user/user-order-detail/user-order-detail.component';
+import { CartItem } from './model/cart-item.model';
 
 
 const appRoutes: Routes = [
@@ -99,8 +100,9 @@ const appRoutes: Routes = [
 export class AppModule { 
   constructor(apollo: Apollo, 
     httpLink: HttpLink,
-    loginService: LoginDetailsService) {
-    
+    loginService: LoginDetailsService,
+    cartService: CartDetailsService) {
+    //TODO DRY
     const http = httpLink.create({uri: 'https://www.vraj23.com/auth/order/graphql'});
 
     const auth = setContext((_, { headers }) => {
@@ -118,5 +120,15 @@ export class AppModule {
       link: auth.concat(http),
       cache: new InMemoryCache(),
     });
+
+    //restores user login after page refresh
+    var token = sessionStorage.getItem('token');
+    if(token != null)
+      loginService.onLogin(token);
+
+    //restore items in cart
+    var cartItems: CartItem[] = JSON.parse(sessionStorage.getItem('cart'));
+    if (cartItems != null)
+      cartService.restoreCartData(cartItems);
   }
 }

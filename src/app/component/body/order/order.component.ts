@@ -19,6 +19,7 @@ export class OrderComponent implements OnInit {
   cartItems: CartItem[] = [];
   orders: OrderRequest[] = [];
   deliveryAddress: Address = new  Address();
+  mobileNumber: string;
   customerName: string;
   customerContact: string;
   placeOrderDisabled: boolean = false;
@@ -40,6 +41,7 @@ export class OrderComponent implements OnInit {
           this.dataService.getCustomerInfo().subscribe(
             (json)=>{
               this.deliveryAddress = json.response.addressResponse;
+              this.mobileNumber = json.response.username;
             }
           );
         }
@@ -62,7 +64,6 @@ export class OrderComponent implements OnInit {
             this.orders=[]
             this.placeOrderDisabled = false;
             this.cartDetailService.resetCart();
-            //TODO show dialog and redirect to user page
           }else{
             console.log('Unable to place Order');
           }

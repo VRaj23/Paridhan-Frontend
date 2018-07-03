@@ -23,6 +23,7 @@ export class LoginDetailsService {
   onLogin(token: string){
     this.token = token.replace(/(\r\n|\n|\r)/gm,"").trim();
     this.loggedIn.next(true);
+    sessionStorage.setItem('token', this.token);
 
   }
 
@@ -30,6 +31,7 @@ export class LoginDetailsService {
     this.apollo.getClient().resetStore();
     this.token = "";
     this.loggedIn.next(false);
+    sessionStorage.removeItem('token');
   }
 
 }

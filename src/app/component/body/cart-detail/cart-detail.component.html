@@ -56,20 +56,22 @@
     </div>
   </div>
 
-  <p>
-    Total: {{totalAmount}}
-  </p>
+  <div class="text-right">
+    <h5 style="font-weight: bold">
+      Total: {{totalAmount}}
+    </h5>
+  </div>
 
 </div>
 
 
 
-<div style="margin-top: 20px">
+<div class="text-center" style="margin-top: 20px">
   <footer>
     <button 
       (click)="initiateOrder()" 
-      class="btn btn-block btn-success"
+      class="btn btn-large btn-success"
       [disabled] = "!showItemTable"
-    >Order</button>
+    >Proceed with Order</button>
   </footer>
 </div>
