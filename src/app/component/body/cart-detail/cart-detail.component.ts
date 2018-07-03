@@ -65,4 +65,9 @@ export class CartDetailComponent implements OnInit {
       this.clearCart();
   }
 
+  onDeleteCartItem(index: number){
+    this.cartDetailsService.deleteCartItem(index);
+    this.cartItems = this.cartDetailsService.getItemsInCart();
+  }
+
 }

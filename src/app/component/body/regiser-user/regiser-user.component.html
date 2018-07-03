@@ -1,55 +1,59 @@
-<h3>Welcome New User</h3>
+<div class="registration-form">
+  <h3>Welcome New User</h3>
 
-<div>
-    <form (ngSubmit)="sendRegisterRequest(formData)" #formData = ngForm>
-        <div class="form-group">
-          <label>Name</label> 
-          <input class="form-control" type="text" ngModel name="name" required autofocus>
+  <div>
+      <form (ngSubmit)="sendRegisterRequest(formData)" #formData = ngForm>
+          <div class="form-group">
+            <label>Name</label> 
+            <input class="form-control" type="text" ngModel name="name" required autofocus>
 
-          <label>Mobile</label>
-          <input class="form-control" type="text" ngModel name="username" required>
+            <label>Mobile</label>
+            <input class="form-control" type="text" ngModel name="username" required>
 
-          <label>E-mail</label>
-          <input class="form-control" type="email" ngModel name="email" required>
+            <label>E-mail</label>
+            <input class="form-control" type="email" ngModel name="email" required>
 
-          <label>Password</label>
-          <input class="form-control" type="password" ngModel name="password" required>
+            <label>Password</label>
+            <input class="form-control" type="password" ngModel name="password" required>
 
-          <label>Confirm Password</label> 
-          <input class="form-control" type="password" ngModel name="password2" required>
-        </div>
+            <label>Confirm Password</label> 
+            <input class="form-control" type="password" ngModel name="password2" required>
+          </div>
 
-        <h5>Address</h5>
+          <h5>Address</h5>
 
-        <div class="form-group">
-          <label>House/Flat Number</label>
-          <input class="form-control" type="text" ngModel name="houseNumber" required>
+          <div class="form-group">
+            <label>House/Flat Number</label>
+            <input class="form-control" type="text" ngModel name="houseNumber" required>
 
-          <label>Area/Colony</label>
-          <input class="form-control" type="text" ngModel name="area" required>
+            <label>Area/Colony</label>
+            <input class="form-control" type="text" ngModel name="area" required>
 
-          <label>Landmark (optional)</label>
-          <input class="form-control" type="text" ngModel name="landmark">
+            <label>Landmark (optional)</label>
+            <input class="form-control" type="text" ngModel name="landmark">
 
-          <select ngModel name="city" required>
-            <option value="" disabled selected>Select City</option>
-            <option *ngFor='let city of cityList'>{{city.cityName+", "+city.stateName}}</option>
-          </select>
+            <select ngModel name="city" required>
+              <option value="" disabled selected>Select City</option>
+              <option *ngFor='let city of cityList'>{{city.cityName+", "+city.stateName}}</option>
+            </select>
+
+            <br>
+
+            <label>Pincode</label>
+            <input class="form-control" type="number" ngModel name="pincode" required>
+
+          </div>
+
+          <div class="text-center" style="margin-bottom: 5%; margin-top: 5%">
+              <button
+                class="btn btn-large btn-success"
+                [disabled]="!formData.valid"
+                type="submit">
+              Submit</button>
+          </div>
           
-          <br>
 
-          <label>Pincode</label>
-          <input class="form-control" type="number" ngModel name="pincode" required>
+        </form>
 
-        </div>
-        
-      
-        <button
-          class="btn btn-default"
-          [disabled]="!formData.valid"
-          type="submit">
-        Submit</button>
-
-      </form>
-      
+  </div>
 </div>

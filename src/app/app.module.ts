@@ -28,7 +28,6 @@ import { ProductTypeRecordComponent } from './component/body/product-type/produc
 import { ProductHeaderRecordComponent } from './component/body/product-header/product-header-record/product-header-record.component';
 import { CartDetailComponent } from './component/body/cart-detail/cart-detail.component';
 import { SearchComponent } from './component/header/search/search.component';
-import { CartItemComponent } from './component/body/cart-detail/cart-item/cart-item.component';
 import { LoginComponent } from './component/body/login/login.component';
 import { OrderComponent } from './component/body/order/order.component';
 import { RegiserUserComponent } from './component/body/regiser-user/regiser-user.component';
@@ -67,7 +66,6 @@ const appRoutes: Routes = [
     ProductHeaderRecordComponent,
     CartDetailComponent,
     SearchComponent,
-    CartItemComponent,
     LoginComponent,
     OrderComponent,
     RegiserUserComponent,

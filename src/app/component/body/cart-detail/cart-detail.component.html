@@ -39,9 +39,10 @@
             <th>Qty</th>
             <th>Price</th>
             <th>Cost</th>
+            <th>Remove</th>
           </tr>
 
-          <tr *ngFor='let item of cartItems'>
+          <tr *ngFor='let item of cartItems; let i = index'>
             <!--  
               edit items in cart
             -->
@@ -49,6 +50,12 @@
             <td>{{ item.quantity }}</td>
             <td>{{ item.price }}</td>
             <td>{{ item.quantity * item.price }}</td>
+            <td align="center">
+              <img 
+                (click)="onDeleteCartItem(i)"
+                src="./assets/delete.png" 
+                width="20px" height="20px">
+            </td>
           </tr> 
 
         </table>
@@ -57,7 +64,7 @@
   </div>
 
   <div class="text-right">
-    <h5 style="font-weight: bold">
+    <h5 style="font-weight: bold; margin-right: 20px">
       Total: {{totalAmount}}
     </h5>
   </div>

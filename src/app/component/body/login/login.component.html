@@ -1,47 +1,48 @@
-<h5>
-  Please Login to proceed
-</h5>
+<div class="login-form">
+  <h5>
+    Please Login to proceed
+  </h5>
 
-<form (ngSubmit)="login(formData)" #formData = ngForm>
+  <form (ngSubmit)="login(formData)" #formData = ngForm>
 
-  <div class="form-group">
-    <label>Mobile</label>
-    <input 
-      type="text" 
-      class="form-control" 
-      ngModel name="username" 
-      (change)="resetLoginFailed()" 
-      autofocus><br>
-  </div>
-  
-  <div class="form-group">
-    <label>Password</label> 
-    <input 
-      type="password" 
-      class="form-control" 
-      ngModel name="password" 
-      (change)="resetLoginFailed()" 
-      required>
-  </div>
+    <div class="form-group">
+      <label>Mobile</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        ngModel name="username" 
+        (change)="resetLoginFailed()" 
+        autofocus><br>
+    </div>
 
-  <div *ngIf="loginFailed">
-    <p style="color: red">Mobile Number or Password is Wrong</p>
-  </div>
+    <div class="form-group">
+      <label>Password</label> 
+      <input 
+        type="password" 
+        class="form-control" 
+        ngModel name="password" 
+        (change)="resetLoginFailed()" 
+        required>
+    </div>
 
-  <div *ngIf="loggingIn">
-    <p>Logging In. Please Wait...</p>
-  </div>
+    <div *ngIf="loginFailed">
+      <p style="color: red">Mobile Number or Password is Wrong</p>
+    </div>
 
-  <div class="form-group">
-    <button 
-      class="btn btn-large btn-success"
-      type="submit"
-      [disabled]="!formData.valid">
-    Login</button>
-  </div>
+    <div *ngIf="loggingIn">
+      <p>Logging In. Please Wait...</p>
+    </div>
 
-</form>
+    <div class="form-group">
+      <button 
+        class="btn btn-large btn-success"
+        type="submit"
+        [disabled]="!formData.valid">
+      Login</button>
+    </div>
 
+  </form>
+</div>
 <br>
 
 <div class="form-row text-center">

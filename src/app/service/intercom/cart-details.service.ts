@@ -67,4 +67,13 @@ export class CartDetailsService {
     return this.itemsInCart;
   }
 
+  deleteCartItem(index: number){
+    if (index > -1) {
+      this.itemsInCart.splice(index, 1);
+      this.add2Cart(this.itemsInCart.length);
+      this.incrementAddedToCartCount(this.addedToCartCount.value+1);
+      this.udpateCartDataInSessionStorage();
+    }
+  }
+
 }
